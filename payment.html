@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment | StudyMint</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    color: #172033;
+}
+
+.navbar {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.logo span {
+    color: #172033;
+}
+
+.back {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 850px;
+    margin: 55px auto;
+    padding: 20px;
+}
+
+.payment-card {
+    background: white;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.order {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+}
+
+.total {
+    border-top: 1px solid #e2e8f0;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background: #1d4ed8;
+}
+
+.demo {
+    margin-top: 18px;
+    background: #fff8e8;
+    color: #795900;
+    padding: 14px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.secure {
+    text-align: center;
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+footer {
+    margin-top: 60px;
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+footer p {
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+@media(max-width:600px) {
+    .payment-card {
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        Study<span>Mint</span>
+    </div>
+
+    <a href="bpsc105.html" class="back">
+        ← Back
+    </a>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="payment-card">
+
+        <h1>Complete Your Purchase</h1>
+
+        <p class="subtitle">
+            Review your order before continuing.
+        </p>
+
+
+        <div class="order">
+
+            <div class="order-row">
+                <span>Course</span>
+                <strong>BPSC-105</strong>
+            </div>
+
+            <div class="order-row">
+                <span>Product</span>
+                <strong>Solved Assignment</strong>
+            </div>
+
+            <div class="order-row">
+                <span>Access</span>
+                <strong>Digital</strong>
+            </div>
+
+            <div class="order-row total">
+                <span>Total</span>
+                <span>₹29</span>
+            </div>
+
+        </div>
+
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            placeholder="Enter your email"
+        >
+
+
+        <button class="pay-btn" onclick="demoPayment()">
+            Continue to Payment — ₹29
+        </button>
+
+
+        <div class="demo">
+            ⚠️ <strong>Demo Mode:</strong>
+            This is a testing payment page. No real payment will
+            be charged. A real payment gateway will be connected
+            later.
+        </div>
+
+
+        <div class="secure">
+            🔒 Your information is handled securely.
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <h3>StudyMint</h3>
+
+    <p>Your Study, Simplified.</p>
+
+</footer>
+
+
+<script>
+
+function demoPayment() {
+
+    const email = document.querySelector("input").value;
+
+    if (email.trim() === "") {
+
+        alert("Please enter your email address.");
+
+        return;
+    }
+
+    alert(
+        "Demo payment page reached successfully!\\n\\n" +
+        "Amount: ₹29\\n" +
+        "Course: BPSC-105"
+    );
+}
+
+</script>
+
+</body>
+</html>
