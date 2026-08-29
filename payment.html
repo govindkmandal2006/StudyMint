@@ -6,6 +6,8 @@
 
 <title>Payment | StudyMint</title>
 
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
 <style>
 * {
     box-sizing: border-box;
@@ -118,6 +120,18 @@ input {
     background: #1d4ed8;
 }
 
+.pay-btn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+.status {
+    margin-top: 15px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
+
 .secure {
     text-align: center;
     margin-top: 20px;
@@ -197,17 +211,23 @@ footer p {
         <label>Email Address</label>
 
         <input
-            type="email"
             id="email"
+            type="email"
             placeholder="Enter your email"
         >
 
-        <button class="pay-btn" onclick="startPayment()">
+        <button
+            id="payButton"
+            class="pay-btn"
+            onclick="startPayment()"
+        >
             Continue to Payment — ₹29
         </button>
 
+        <div id="status" class="status"></div>
+
         <div class="secure">
-            🔒 Your information is handled securely.
+            🔒 Secure payment powered by Cashfree
         </div>
 
     </div>
@@ -222,54 +242,80 @@ footer p {
 
 </footer>
 
-<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
-
 <script>
+
+const cashfree = Cashfree({
+    mode: "sandbox"
+});
 
 async function startPayment() {
 
     const email = document.getElementById("email").value.trim();
+    const button = document.getElementById("payButton");
+    const status = document.getElementById("status");
 
-    if (!email) {
+    if (email === "") {
         alert("Please enter your email address.");
         return;
     }
 
+    button.disabled = true;
+    button.innerText = "Creating Payment...";
+    status.innerText = "Please wait...";
+
     try {
 
         const response = await fetch("/create-order", {
+
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
                 email: email
             })
+
         });
 
         const data = await response.json();
 
-        if (!response.ok) {
-            alert("Payment order create nahi hua.");
+        if (!response.ok || !data.payment_session_id) {
+
             console.error(data);
-            return;
+
+            throw new Error(
+                data.error || "Unable to create payment"
+            );
+
         }
 
-        const cashfree = Cashfree({
-            mode: "sandbox"
-        });
+        status.innerText = "Opening Cashfree payment...";
 
         await cashfree.checkout({
+
             paymentSessionId: data.payment_session_id,
+
             redirectTarget: "_self"
+
         });
 
     } catch (error) {
 
         console.error(error);
-        alert("Payment start nahi ho paya.");
+
+        alert(
+            "Payment start nahi ho paya.\n\n" +
+            error.message
+        );
+
+        button.disabled = false;
+        button.innerText = "Continue to Payment — ₹29";
+        status.innerText = "";
 
     }
+
 }
 
 </script>
