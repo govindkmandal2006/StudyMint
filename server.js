@@ -9,6 +9,11 @@ app.use(express.static(__dirname));
 
 const PORT = process.env.PORT || 3000;
 
+
+// ===============================
+// CREATE CASHFREE ORDER
+// ===============================
+
 app.post("/create-order", async (req, res) => {
     try {
         const { email } = req.body;
@@ -38,11 +43,13 @@ app.post("/create-order", async (req, res) => {
                     order_id: orderId,
                     order_amount: 29,
                     order_currency: "INR",
+
                     customer_details: {
                         customer_id: "student_" + Date.now(),
                         customer_email: email,
                         customer_phone: "9999999999"
                     },
+
                     order_meta: {
                         return_url:
                             "https://studymint.onrender.com/payment-success.html?order_id={order_id}"
@@ -75,6 +82,64 @@ app.post("/create-order", async (req, res) => {
         });
     }
 });
+
+
+// ===============================
+// VERIFY CASHFREE PAYMENT
+// ===============================
+
+app.get("/verify-payment/:orderId", async (req, res) => {
+    try {
+
+        const response = await fetch(
+            `https://sandbox.cashfree.com/pg/orders/${req.params.orderId}/payments`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Accept": "application/json",
+                    "x-api-version": "2025-01-01",
+                    "x-client-id": process.env.CASHFREE_APP_ID,
+                    "x-client-secret": process.env.CASHFREE_SECRET_KEY
+                }
+            }
+        );
+
+        const payments = await response.json();
+
+        if (!response.ok) {
+            console.error(payments);
+
+            return res.status(500).json({
+                success: false,
+                error: "Payment verification failed"
+            });
+        }
+
+        const paid = payments.some(
+            payment =>
+                payment.payment_status === "SUCCESS"
+        );
+
+        res.json({
+            success: paid
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: "Server error"
+        });
+    }
+});
+
+
+// ===============================
+// START SERVER
+// ===============================
 
 app.listen(PORT, () => {
     console.log(`StudyMint running on port ${PORT}`);
