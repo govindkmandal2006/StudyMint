@@ -8,7 +8,6 @@
 <title>Payment Successful | StudyMint</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -20,7 +19,6 @@ body {
     background: #f5f7fb;
     color: #172033;
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,13 +28,9 @@ body {
     background: white;
     width: 90%;
     max-width: 550px;
-
     padding: 45px 30px;
-
     border-radius: 18px;
-
     text-align: center;
-
     box-shadow: 0 5px 25px rgba(0,0,0,0.08);
 }
 
@@ -57,17 +51,12 @@ p {
 }
 
 .download {
-    display: inline-block;
-
+    display: none;
     margin-top: 20px;
-
     padding: 14px 25px;
-
     background: #2563eb;
     color: white;
-
     text-decoration: none;
-
     border-radius: 9px;
 }
 
@@ -75,6 +64,10 @@ p {
     background: #1d4ed8;
 }
 
+.status {
+    margin-top: 15px;
+    color: #64748b;
+}
 </style>
 </head>
 
@@ -82,21 +75,18 @@ p {
 
 <div class="card">
 
-    <div class="icon">✅</div>
+    <div class="icon" id="icon">⏳</div>
 
-    <h1>Payment Successful!</h1>
+    <h1 id="title">Verifying Payment...</h1>
 
-    <p>
-        Thank you for your purchase.
-    </p>
-
-    <p>
-        Your BPSC-105 Solved Assignment is ready.
+    <p id="message">
+        Please wait while we verify your payment.
     </p>
 
     <a
         href="bpsc105-assignment.pdf"
         class="download"
+        id="download"
         target="_blank"
     >
         Download Assignment
@@ -104,6 +94,71 @@ p {
 
 </div>
 
-</body>
+<script>
 
+async function verifyPayment() {
+
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("order_id");
+
+    if (!orderId) {
+        showFailed("Invalid payment order.");
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "/verify-payment/" + encodeURIComponent(orderId)
+        );
+
+        const data = await response.json();
+
+        if (data.success === true) {
+
+            document.getElementById("icon").innerText = "✅";
+            document.getElementById("title").innerText =
+                "Payment Successful!";
+
+            document.getElementById("message").innerText =
+                "Your BPSC-105 Solved Assignment is ready.";
+
+            document.getElementById("download").style.display =
+                "inline-block";
+
+        } else {
+
+            showFailed(
+                "Payment was not completed successfully."
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        showFailed(
+            "Unable to verify payment. Please try again."
+        );
+
+    }
+}
+
+function showFailed(message) {
+
+    document.getElementById("icon").innerText = "❌";
+
+    document.getElementById("title").innerText =
+        "Payment Not Verified";
+
+    document.getElementById("message").innerText =
+        message;
+}
+
+verifyPayment();
+
+</script>
+
+</body>
 </html>
