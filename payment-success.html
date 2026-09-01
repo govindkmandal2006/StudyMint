@@ -84,7 +84,7 @@ p {
     </p>
 
     <a
-        href="bpsc105-assignment.pdf"
+        href="#"
         class="download"
         id="download"
         target="_blank"
@@ -117,13 +117,21 @@ async function verifyPayment() {
         if (data.success === true) {
 
             document.getElementById("icon").innerText = "✅";
+
             document.getElementById("title").innerText =
                 "Payment Successful!";
 
             document.getElementById("message").innerText =
                 "Your BPSC-105 Solved Assignment is ready.";
 
-            document.getElementById("download").style.display =
+            const downloadButton =
+                document.getElementById("download");
+
+            downloadButton.href =
+                "/download-assignment/" +
+                encodeURIComponent(orderId);
+
+            downloadButton.style.display =
                 "inline-block";
 
         } else {
