@@ -104,6 +104,26 @@
             font-size: 16px;
         }
 
+        .session-box {
+            background: #eef6ff;
+            border: 1px solid #bfdbfe;
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .session-box small {
+            display: block;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .session-box strong {
+            font-size: 18px;
+            color: #172033;
+        }
+
         .divider {
             height: 1px;
             background: #e5e7eb;
@@ -141,6 +161,7 @@
         }
 
         .buy-btn {
+            display: inline-block;
             border: none;
             background: #2563eb;
             color: white;
@@ -148,6 +169,7 @@
             border-radius: 9px;
             font-size: 16px;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .buy-btn:hover {
@@ -156,12 +178,25 @@
 
         .notice {
             margin-top: 25px;
-            padding: 15px;
+            padding: 16px;
             background: #fff8e8;
+            border: 1px solid #f4d58d;
             border-radius: 10px;
             color: #795900;
-            font-size: 13px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .session-warning {
+            margin-top: 15px;
+            padding: 16px;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: 10px;
+            color: #9f1239;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 600;
         }
 
         footer {
@@ -251,8 +286,19 @@
 
                 <div class="info-box">
                     <small>Session</small>
-                    <strong>2025–26</strong>
+                    <strong>July 2025 – January 2026</strong>
                 </div>
+
+            </div>
+
+
+            <div class="session-box">
+
+                <small>📚 ASSIGNMENT SESSION</small>
+
+                <strong>
+                    July 2025 – January 2026
+                </strong>
 
             </div>
 
@@ -278,6 +324,7 @@
             <div class="price-box">
 
                 <div>
+
                     <div style="color:#64748b; font-size:14px;">
                         Price
                     </div>
@@ -285,6 +332,7 @@
                     <div class="price">
                         ₹29
                     </div>
+
                 </div>
 
                 <a href="payment.html" class="buy-btn">
@@ -294,9 +342,21 @@
             </div>
 
 
+            <div class="session-warning">
+
+                ⚠️ <strong>Important:</strong>
+                This solved assignment is specifically for the
+                <strong>July 2025 – January 2026 Session.</strong>
+                Please verify your assignment session before making the purchase.
+
+            </div>
+
+
             <div class="notice">
+
                 ⚠️ StudyMint is an independent educational platform and is
                 not affiliated with or endorsed by IGNOU.
+
             </div>
 
         </div>
@@ -313,19 +373,6 @@
         <p>© 2026 StudyMint. All rights reserved.</p>
 
     </footer>
-
-
-    <script>
-
-        function buyNow() {
-
-            alert(
-                "Payment system will be connected in the next step."
-            );
-
-        }
-
-    </script>
 
 </body>
 </html>
