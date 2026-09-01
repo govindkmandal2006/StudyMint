@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,30 +105,43 @@
             font-size: 16px;
         }
 
-        .session-box {
-            background: #eef6ff;
-            border: 1px solid #bfdbfe;
-            padding: 18px 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-
-        .session-box small {
-            display: block;
-            color: #2563eb;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .session-box strong {
-            font-size: 18px;
-            color: #172033;
-        }
-
         .divider {
             height: 1px;
             background: #e5e7eb;
             margin: 30px 0;
+        }
+
+        .question-paper {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .question-paper h2 {
+            margin-bottom: 10px;
+        }
+
+        .question-paper p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #172033;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #0f172a;
         }
 
         h2 {
@@ -162,14 +176,13 @@
 
         .buy-btn {
             display: inline-block;
-            border: none;
+            text-decoration: none;
             background: #2563eb;
             color: white;
             padding: 14px 28px;
             border-radius: 9px;
             font-size: 16px;
             cursor: pointer;
-            text-decoration: none;
         }
 
         .buy-btn:hover {
@@ -178,25 +191,12 @@
 
         .notice {
             margin-top: 25px;
-            padding: 16px;
+            padding: 15px;
             background: #fff8e8;
-            border: 1px solid #f4d58d;
             border-radius: 10px;
             color: #795900;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .session-warning {
-            margin-top: 15px;
-            padding: 16px;
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
-            border-radius: 10px;
-            color: #9f1239;
-            font-size: 14px;
-            line-height: 1.6;
-            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         footer {
@@ -235,6 +235,12 @@
 
             .buy-btn {
                 width: 100%;
+                text-align: center;
+            }
+
+            .view-btn {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -292,18 +298,28 @@
             </div>
 
 
-            <div class="session-box">
+            <div class="divider"></div>
 
-                <small>📚 ASSIGNMENT SESSION</small>
 
-                <strong>
-                    July 2025 – January 2026
-                </strong>
+            <div class="question-paper">
+
+                <h2>📄 Check Question Paper</h2>
+
+                <p>
+                    Before purchasing, please check the question paper
+                    and confirm that it matches your assignment and session.
+                </p>
+
+                <a
+                    href="bpsc105-question-paper.pdf"
+                    class="view-btn"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    View Question Paper
+                </a>
 
             </div>
-
-
-            <div class="divider"></div>
 
 
             <h2>What's Included?</h2>
@@ -324,7 +340,6 @@
             <div class="price-box">
 
                 <div>
-
                     <div style="color:#64748b; font-size:14px;">
                         Price
                     </div>
@@ -332,7 +347,6 @@
                     <div class="price">
                         ₹29
                     </div>
-
                 </div>
 
                 <a href="payment.html" class="buy-btn">
@@ -342,21 +356,10 @@
             </div>
 
 
-            <div class="session-warning">
-
-                ⚠️ <strong>Important:</strong>
-                This solved assignment is specifically for the
-                <strong>July 2025 – January 2026 Session.</strong>
-                Please verify your assignment session before making the purchase.
-
-            </div>
-
-
             <div class="notice">
-
-                ⚠️ StudyMint is an independent educational platform and is
-                not affiliated with or endorsed by IGNOU.
-
+                ⚠️ Please verify the question paper and session before
+                purchasing. StudyMint is an independent educational platform
+                and is not affiliated with or endorsed by IGNOU.
             </div>
 
         </div>
