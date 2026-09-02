@@ -18,6 +18,10 @@ app.get("/bpsc105-assignment.pdf", (req, res) => {
     res.status(403).send("Direct access is not allowed.");
 });
 
+app.get("/bpsc104-assignment.pdf", (req, res) => {
+    res.status(403).send("Direct access is not allowed.");
+});
+
 
 // ======================================
 // SERVE WEBSITE FILES
@@ -31,74 +35,154 @@ app.use(express.static(__dirname));
 // ======================================
 
 app.post("/create-order", async (req, res) => {
-    try {
-        const { email } = req.body;
 
+    try {
+
+        const { email, course } = req.body;
+
+
+        // Check email
         if (!email) {
+
             return res.status(400).json({
                 error: "Email is required"
             });
+
         }
 
-        const orderId = "BPSC105_" + Date.now();
 
+        // Only allow these courses
+        if (
+            course !== "BPSC-105" &&
+            course !== "BPSC-104"
+        ) {
+
+            return res.status(400).json({
+                error: "Invalid course"
+            });
+
+        }
+
+
+        // Create course-specific order ID
+        const orderPrefix =
+            course === "BPSC-104"
+                ? "BPSC104_"
+                : "BPSC105_";
+
+
+        const orderId =
+            orderPrefix + Date.now();
+
+
+        // Create Cashfree order
         const response = await fetch(
             "https://sandbox.cashfree.com/pg/orders",
             {
+
                 method: "POST",
 
                 headers: {
+
                     "Content-Type": "application/json",
+
                     "Accept": "application/json",
+
                     "x-api-version": "2025-01-01",
-                    "x-client-id": process.env.CASHFREE_APP_ID,
-                    "x-client-secret": process.env.CASHFREE_SECRET_KEY
+
+                    "x-client-id":
+                        process.env.CASHFREE_APP_ID,
+
+                    "x-client-secret":
+                        process.env.CASHFREE_SECRET_KEY
+
                 },
 
+
                 body: JSON.stringify({
+
                     order_id: orderId,
 
                     order_amount: 29,
 
                     order_currency: "INR",
 
+
                     customer_details: {
-                        customer_id: "student_" + Date.now(),
+
+                        customer_id:
+                            "student_" + Date.now(),
+
                         customer_email: email,
-                        customer_phone: "9999999999"
+
+                        customer_phone:
+                            "9999999999"
+
                     },
 
+
                     order_meta: {
+
                         return_url:
                             "https://studymint.onrender.com/payment-success.html?order_id={order_id}"
+
                     }
+
                 })
+
             }
         );
 
-        const data = await response.json();
+
+        const data =
+            await response.json();
+
 
         if (!response.ok) {
-            console.error("Cashfree Error:", data);
+
+            console.error(
+                "Cashfree Error:",
+                data
+            );
 
             return res.status(500).json({
-                error: "Cashfree order creation failed"
+
+                error:
+                    "Cashfree order creation failed"
+
             });
+
         }
 
+
         res.json({
-            payment_session_id: data.payment_session_id,
-            order_id: data.order_id
+
+            payment_session_id:
+                data.payment_session_id,
+
+            order_id:
+                data.order_id
+
         });
+
 
     } catch (error) {
 
-        console.error("Server Error:", error);
+        console.error(
+            "Server Error:",
+            error
+        );
+
 
         res.status(500).json({
-            error: "Server error"
+
+            error:
+                "Server error"
+
         });
+
     }
+
 });
 
 
@@ -106,159 +190,331 @@ app.post("/create-order", async (req, res) => {
 // VERIFY CASHFREE PAYMENT
 // ======================================
 
-app.get("/verify-payment/:orderId", async (req, res) => {
+app.get(
+    "/verify-payment/:orderId",
+    async (req, res) => {
 
-    try {
+        try {
 
-        const orderId = req.params.orderId;
+            const orderId =
+                req.params.orderId;
 
-        // Only allow our BPSC-105 orders
-        if (!orderId.startsWith("BPSC105_")) {
-            return res.status(400).json({
-                success: false,
-                error: "Invalid order"
-            });
-        }
 
-        const response = await fetch(
-            `https://sandbox.cashfree.com/pg/orders/${encodeURIComponent(orderId)}/payments`,
-            {
-                method: "GET",
+            // Check valid order
+            const isBPSC105 =
+                orderId.startsWith("BPSC105_");
 
-                headers: {
-                    "Accept": "application/json",
-                    "x-api-version": "2025-01-01",
-                    "x-client-id": process.env.CASHFREE_APP_ID,
-                    "x-client-secret": process.env.CASHFREE_SECRET_KEY
-                }
+            const isBPSC104 =
+                orderId.startsWith("BPSC104_");
+
+
+            if (!isBPSC105 && !isBPSC104) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    error:
+                        "Invalid order"
+
+                });
+
             }
-        );
 
-        const payments = await response.json();
 
-        if (!response.ok) {
+            // Ask Cashfree for payment status
+            const response = await fetch(
 
-            console.error("Verification Error:", payments);
+                `https://sandbox.cashfree.com/pg/orders/${encodeURIComponent(orderId)}/payments`,
 
-            return res.status(500).json({
-                success: false,
-                error: "Payment verification failed"
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "x-api-version":
+                            "2025-01-01",
+
+                        "x-client-id":
+                            process.env.CASHFREE_APP_ID,
+
+                        "x-client-secret":
+                            process.env.CASHFREE_SECRET_KEY
+
+                    }
+
+                }
+
+            );
+
+
+            const payments =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                console.error(
+                    "Verification Error:",
+                    payments
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    error:
+                        "Payment verification failed"
+
+                });
+
+            }
+
+
+            // Check successful payment
+            const paid =
+                payments.some(
+
+                    payment =>
+                        payment.payment_status ===
+                        "SUCCESS"
+
+                );
+
+
+            // Identify course
+            const course =
+                isBPSC104
+                    ? "BPSC-104"
+                    : "BPSC-105";
+
+
+            res.json({
+
+                success: paid,
+
+                course: course
+
             });
+
+
+        } catch (error) {
+
+            console.error(
+                "Verification Error:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success: false,
+
+                error:
+                    "Server error"
+
+            });
+
         }
 
-        const paid = payments.some(
-            payment =>
-                payment.payment_status === "SUCCESS"
-        );
-
-        res.json({
-            success: paid
-        });
-
-    } catch (error) {
-
-        console.error("Verification Error:", error);
-
-        res.status(500).json({
-            success: false,
-            error: "Server error"
-        });
     }
-});
+);
 
 
 // ======================================
 // SECURE PDF DOWNLOAD
 // ======================================
 
-app.get("/download-assignment/:orderId", async (req, res) => {
+app.get(
+    "/download-assignment/:orderId",
+    async (req, res) => {
 
-    try {
+        try {
 
-        const orderId = req.params.orderId;
+            const orderId =
+                req.params.orderId;
 
-        // Check order format
-        if (!orderId.startsWith("BPSC105_")) {
-            return res.status(403).send("Invalid order.");
-        }
 
-        const response = await fetch(
-            `https://sandbox.cashfree.com/pg/orders/${encodeURIComponent(orderId)}/payments`,
-            {
-                method: "GET",
+            // Identify course from order ID
+            let course = null;
 
-                headers: {
-                    "Accept": "application/json",
-                    "x-api-version": "2025-01-01",
-                    "x-client-id": process.env.CASHFREE_APP_ID,
-                    "x-client-secret": process.env.CASHFREE_SECRET_KEY
-                }
-            }
-        );
+            let pdfFile = null;
 
-        const payments = await response.json();
+            let downloadName = null;
 
-        if (!response.ok) {
-            return res.status(500).send(
-                "Unable to verify payment."
-            );
-        }
 
-        const paid = payments.some(
-            payment =>
-                payment.payment_status === "SUCCESS"
-        );
+            if (
+                orderId.startsWith("BPSC105_")
+            ) {
 
-        // Payment successful nahi hai
-        if (!paid) {
-            return res.status(403).send(
-                "Payment required."
-            );
-        }
+                course = "BPSC-105";
 
-        // Payment successful hai
-        const pdfPath = path.join(
-            __dirname,
-            "bpsc105-assignment.pdf"
-        );
+                pdfFile =
+                    "bpsc105-assignment.pdf";
 
-        res.download(
-            pdfPath,
-            "BPSC-105-Solved-Assignment.pdf",
-            error => {
-
-                if (error) {
-                    console.error(
-                        "PDF Download Error:",
-                        error
-                    );
-                }
+                downloadName =
+                    "BPSC-105-Solved-Assignment.pdf";
 
             }
-        );
 
-    } catch (error) {
 
-        console.error(
-            "Download Error:",
-            error
-        );
+            else if (
+                orderId.startsWith("BPSC104_")
+            ) {
 
-        res.status(500).send(
-            "Unable to download assignment."
-        );
+                course = "BPSC-104";
+
+                pdfFile =
+                    "bpsc104-assignment.pdf";
+
+                downloadName =
+                    "BPSC-104-Solved-Assignment.pdf";
+
+            }
+
+
+            else {
+
+                return res.status(403).send(
+                    "Invalid order."
+                );
+
+            }
+
+
+            // Verify payment with Cashfree
+            const response = await fetch(
+
+                `https://sandbox.cashfree.com/pg/orders/${encodeURIComponent(orderId)}/payments`,
+
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "x-api-version":
+                            "2025-01-01",
+
+                        "x-client-id":
+                            process.env.CASHFREE_APP_ID,
+
+                        "x-client-secret":
+                            process.env.CASHFREE_SECRET_KEY
+
+                    }
+
+                }
+
+            );
+
+
+            const payments =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                console.error(
+                    "Download Verification Error:",
+                    payments
+                );
+
+                return res.status(500).send(
+                    "Unable to verify payment."
+                );
+
+            }
+
+
+            // Check successful payment
+            const paid =
+                payments.some(
+
+                    payment =>
+                        payment.payment_status ===
+                        "SUCCESS"
+
+                );
+
+
+            // Payment successful nahi hai
+            if (!paid) {
+
+                return res.status(403).send(
+                    "Payment required."
+                );
+
+            }
+
+
+            // PDF path
+            const pdfPath =
+                path.join(
+                    __dirname,
+                    pdfFile
+                );
+
+
+            // Download correct PDF
+            res.download(
+
+                pdfPath,
+
+                downloadName,
+
+                error => {
+
+                    if (error) {
+
+                        console.error(
+                            "PDF Download Error:",
+                            error
+                        );
+
+                    }
+
+                }
+
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Download Error:",
+                error
+            );
+
+
+            res.status(500).send(
+                "Unable to download assignment."
+            );
+
+        }
+
     }
-});
+);
 
 
 // ======================================
 // START SERVER
 // ======================================
 
-app.listen(PORT, () => {
+app.listen(
+    PORT,
+    () => {
 
-    console.log(
-        `StudyMint running on port ${PORT}`
-    );
+        console.log(
+            `StudyMint running on port ${PORT}`
+        );
 
-});
+    }
+);
