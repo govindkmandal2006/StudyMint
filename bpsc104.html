@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BPSC-104 | StudyMint</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f6f8fc;
+            color: #172033;
+        }
+
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #172033;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eaf1ff;
+            color: #2563eb;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 17px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .info-box small {
+            display: block;
+            color: #64748b;
+            margin-bottom: 7px;
+        }
+
+        .info-box strong {
+            font-size: 16px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 30px 0;
+        }
+
+        .question-paper {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .question-paper h2 {
+            margin-bottom: 10px;
+        }
+
+        .question-paper p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #172033;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #0f172a;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            margin: 12px 0;
+            color: #374151;
+        }
+
+        .price-box {
+            background: #f0f6ff;
+            border-radius: 14px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: bold;
+            color: #172033;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 9px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff8e8;
+            border-radius: 10px;
+            color: #795900;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 60px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+
+            .product {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            .price-box {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .buy-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Study<span>Mint</span>
+        </div>
+
+        <a href="index.html" class="back">
+            ← Back to Home
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="product">
+
+            <span class="tag">
+                SOLVED ASSIGNMENT
+            </span>
+
+            <h1>BPSC-104</h1>
+
+            <p class="subtitle">
+                भारतीय राजनीतिक प्रक्रिया
+                <br>
+                Indian Political Process
+            </p>
+
+
+            <div class="info">
+
+                <div class="info-box">
+                    <small>Course Code</small>
+                    <strong>BPSC-104</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>Programme</small>
+                    <strong>BA Political Science</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>Session</small>
+                    <strong>2025–26</strong>
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <div class="question-paper">
+
+                <h2>📄 Check Question Paper</h2>
+
+                <p>
+                    Before purchasing, please check the question paper
+                    and confirm that it matches your assignment and session.
+                </p>
+
+                <a
+                    href="bpsc104-question-paper.pdf"
+                    class="view-btn"
+                    target="_blank"
+                >
+                    View Question Paper
+                </a>
+
+            </div>
+
+
+            <h2>What's Included?</h2>
+
+            <ul class="features">
+
+                <li>✅ Complete question-wise solutions</li>
+
+                <li>✅ Easy-to-understand language</li>
+
+                <li>✅ Proper assignment-style answers</li>
+
+                <li>✅ Digital access after successful purchase</li>
+
+            </ul>
+
+
+            <div class="price-box">
+
+                <div>
+
+                    <div style="color:#64748b; font-size:14px;">
+                        Price
+                    </div>
+
+                    <div class="price">
+                        ₹29
+                    </div>
+
+                </div>
+
+                <a href="payment.html" class="buy-btn">
+                    Buy Now — ₹29
+                </a>
+
+            </div>
+
+
+            <div class="notice">
+                ⚠️ StudyMint is an independent educational platform and is
+                not affiliated with or endorsed by IGNOU.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <h3>StudyMint</h3>
+
+        <p>Your Study, Simplified.</p>
+
+        <p>© 2026 StudyMint. All rights reserved.</p>
+
+    </footer>
+
+</body>
+</html>
