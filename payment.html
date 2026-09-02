@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
 <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -153,14 +155,19 @@ footer p {
 }
 
 @media(max-width:600px) {
+
     .payment-card {
         padding: 25px;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
+
 
 <nav class="navbar">
 
@@ -168,11 +175,12 @@ footer p {
         Study<span>Mint</span>
     </div>
 
-    <a href="bpsc105.html" class="back">
+    <a id="backLink" href="index.html" class="back">
         ← Back
     </a>
 
 </nav>
+
 
 <div class="container">
 
@@ -184,37 +192,66 @@ footer p {
             Review your order before continuing.
         </p>
 
+
         <div class="order">
 
             <div class="order-row">
+
                 <span>Course</span>
-                <strong>BPSC-105</strong>
+
+                <strong id="courseName">
+                    BPSC-105
+                </strong>
+
             </div>
 
+
             <div class="order-row">
+
                 <span>Product</span>
-                <strong>Solved Assignment</strong>
+
+                <strong>
+                    Solved Assignment
+                </strong>
+
             </div>
 
+
             <div class="order-row">
+
                 <span>Access</span>
-                <strong>Digital</strong>
+
+                <strong>
+                    Digital
+                </strong>
+
             </div>
+
 
             <div class="order-row total">
+
                 <span>Total</span>
-                <span>₹29</span>
+
+                <span>
+                    ₹29
+                </span>
+
             </div>
 
         </div>
 
-        <label>Email Address</label>
+
+        <label>
+            Email Address
+        </label>
+
 
         <input
             id="email"
             type="email"
             placeholder="Enter your email"
         >
+
 
         <button
             id="payButton"
@@ -224,7 +261,9 @@ footer p {
             Continue to Payment — ₹29
         </button>
 
+
         <div id="status" class="status"></div>
+
 
         <div class="secure">
             🔒 Secure payment powered by Cashfree
@@ -234,84 +273,160 @@ footer p {
 
 </div>
 
+
 <footer>
 
-    <h3>StudyMint</h3>
+    <h3>
+        StudyMint
+    </h3>
 
-    <p>Your Study, Simplified.</p>
+    <p>
+        Your Study, Simplified.
+    </p>
 
 </footer>
 
+
 <script>
+
+
+/* GET COURSE FROM URL */
+
+const params = new URLSearchParams(window.location.search);
+
+const course = params.get("course") || "BPSC-105";
+
+
+/* COURSE DETAILS */
+
+const courseName = document.getElementById("courseName");
+const backLink = document.getElementById("backLink");
+
+
+if (course === "BPSC-104") {
+
+    courseName.innerText = "BPSC-104";
+
+    backLink.href = "bpsc104.html";
+
+} else {
+
+    courseName.innerText = "BPSC-105";
+
+    backLink.href = "bpsc105.html";
+
+}
+
+
+/* CASHFREE */
 
 const cashfree = Cashfree({
     mode: "sandbox"
 });
 
+
+/* START PAYMENT */
+
 async function startPayment() {
 
-    const email = document.getElementById("email").value.trim();
-    const button = document.getElementById("payButton");
-    const status = document.getElementById("status");
+    const email =
+        document.getElementById("email").value.trim();
+
+    const button =
+        document.getElementById("payButton");
+
+    const status =
+        document.getElementById("status");
+
 
     if (email === "") {
+
         alert("Please enter your email address.");
+
         return;
+
     }
 
+
     button.disabled = true;
+
     button.innerText = "Creating Payment...";
+
     status.innerText = "Please wait...";
+
 
     try {
 
-        const response = await fetch("/create-order", {
+        const response = await fetch(
+            "/create-order",
+            {
 
-            method: "POST",
+                method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            body: JSON.stringify({
-                email: email
-            })
+                body: JSON.stringify({
 
-        });
+                    email: email,
+
+                    course: course
+
+                })
+
+            }
+        );
+
 
         const data = await response.json();
 
-        if (!response.ok || !data.payment_session_id) {
+
+        if (
+            !response.ok ||
+            !data.payment_session_id
+        ) {
 
             console.error(data);
 
             throw new Error(
-                data.error || "Unable to create payment"
+                data.error ||
+                "Unable to create payment"
             );
 
         }
 
-        status.innerText = "Opening Cashfree payment...";
+
+        status.innerText =
+            "Opening Cashfree payment...";
+
 
         await cashfree.checkout({
 
-            paymentSessionId: data.payment_session_id,
+            paymentSessionId:
+                data.payment_session_id,
 
             redirectTarget: "_self"
 
         });
 
+
     } catch (error) {
 
         console.error(error);
+
 
         alert(
             "Payment start nahi ho paya.\n\n" +
             error.message
         );
 
+
         button.disabled = false;
-        button.innerText = "Continue to Payment — ₹29";
+
+        button.innerText =
+            "Continue to Payment — ₹29";
+
         status.innerText = "";
 
     }
@@ -320,5 +435,7 @@ async function startPayment() {
 
 </script>
 
+
 </body>
+
 </html>
