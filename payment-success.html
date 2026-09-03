@@ -61,10 +61,12 @@
             line-height: 1.6;
         }
 
-        .download-btn,
-        .home-btn {
+        .download-btn {
             display: inline-block;
             text-decoration: none;
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
             border-radius: 9px;
             padding: 14px 25px;
             font-size: 16px;
@@ -73,22 +75,23 @@
             transition: 0.2s;
         }
 
-        .download-btn {
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            margin-bottom: 15px;
-        }
-
         .download-btn:hover {
             background: #1d4ed8;
             transform: translateY(-1px);
         }
 
         .home-btn {
+            display: none;
+            margin-top: 15px;
+            text-decoration: none;
             background: #ffffff;
             color: #2563eb;
             border: 1px solid #2563eb;
+            border-radius: 9px;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.2s;
         }
 
         .home-btn:hover {
@@ -98,13 +101,12 @@
         .loading {
             color: #64748b;
             font-size: 15px;
-            margin-top: 20px;
         }
 
         .error {
             color: #dc2626;
             font-size: 15px;
-            margin-top: 20px;
+            line-height: 1.5;
         }
 
         @media (max-width: 500px) {
@@ -143,25 +145,22 @@
 
         <div id="downloadArea"></div>
 
-        <div id="statusMessage"></div>
-
     </div>
 
 
     <script>
 
-        const params = new URLSearchParams(window.location.search);
+        const params =
+            new URLSearchParams(window.location.search);
 
-        const orderId = params.get("order_id");
+        const orderId =
+            params.get("order_id");
 
         const courseMessage =
             document.getElementById("courseMessage");
 
         const downloadArea =
             document.getElementById("downloadArea");
-
-        const statusMessage =
-            document.getElementById("statusMessage");
 
 
         async function verifyPayment() {
@@ -171,7 +170,7 @@
                 courseMessage.innerText =
                     "Payment information could not be found.";
 
-                statusMessage.innerHTML = `
+                downloadArea.innerHTML = `
                     <p class="error">
                         Invalid order.
                     </p>
@@ -205,6 +204,7 @@
                         <a
                             href="/download-assignment/${orderId}"
                             class="download-btn"
+                            id="downloadBtn"
                         >
                             Download Assignment
                         </a>
@@ -214,30 +214,51 @@
                         <a
                             href="index.html"
                             class="home-btn"
+                            id="homeBtn"
                         >
                             ← Back to Home
                         </a>
 
                     `;
 
+
+                    const downloadBtn =
+                        document.getElementById("downloadBtn");
+
+                    const homeBtn =
+                        document.getElementById("homeBtn");
+
+
+                    downloadBtn.addEventListener(
+                        "click",
+                        function () {
+
+                            /*
+                             * Download request starts here.
+                             * After clicking Download,
+                             * Back to Home button becomes visible.
+                             */
+
+                            setTimeout(function () {
+
+                                homeBtn.style.display =
+                                    "inline-block";
+
+                            }, 300);
+
+                        }
+                    );
+
+
                 } else {
 
                     courseMessage.innerText =
                         "Your payment could not be verified yet.";
 
-                    statusMessage.innerHTML = `
+                    downloadArea.innerHTML = `
                         <p class="error">
                             Please wait a moment and try again.
                         </p>
-
-                        <br>
-
-                        <a
-                            href="index.html"
-                            class="home-btn"
-                        >
-                            ← Back to Home
-                        </a>
                     `;
 
                 }
@@ -247,19 +268,10 @@
                 courseMessage.innerText =
                     "Something went wrong while verifying your payment.";
 
-                statusMessage.innerHTML = `
+                downloadArea.innerHTML = `
                     <p class="error">
                         Please try again later.
                     </p>
-
-                    <br>
-
-                    <a
-                        href="index.html"
-                        class="home-btn"
-                    >
-                        ← Back to Home
-                    </a>
                 `;
 
             }
