@@ -20,6 +20,7 @@
         }
 
         /* NAVBAR */
+
         .navbar {
             width: 100%;
             background: #ffffff;
@@ -33,6 +34,7 @@
             max-width: 1150px;
             margin: auto;
             padding: 18px 25px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -61,16 +63,26 @@
             color: #2563eb;
         }
 
+
         /* HERO */
+
         .hero {
             min-height: 620px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             text-align: center;
+
             padding: 70px 20px;
+
             background:
-                linear-gradient(180deg, #eef5ff 0%, #f7f9fc 100%);
+                linear-gradient(
+                    180deg,
+                    #eef5ff 0%,
+                    #f7f9fc 100%
+                );
         }
 
         .hero-content {
@@ -80,19 +92,26 @@
 
         .hero-badge {
             display: inline-block;
+
             padding: 8px 16px;
+
             border-radius: 30px;
+
             background: #dbeafe;
             color: #2563eb;
+
             font-size: 14px;
             font-weight: 700;
+
             margin-bottom: 22px;
         }
 
         .hero h1 {
             font-size: 58px;
             line-height: 1.1;
+
             color: #111827;
+
             margin-bottom: 20px;
         }
 
@@ -103,31 +122,51 @@
         .hero p {
             font-size: 19px;
             line-height: 1.7;
+
             color: #6b7280;
+
             max-width: 650px;
+
             margin: 0 auto 35px;
         }
 
+
         /* SEARCH */
+
         .search-box {
             max-width: 700px;
+
             margin: auto;
+
             background: #ffffff;
+
             padding: 10px;
+
             border-radius: 16px;
+
             display: flex;
+
             gap: 10px;
-            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
+
+            box-shadow:
+                0 15px 40px
+                rgba(37, 99, 235, 0.15);
+
             border: 1px solid #dbeafe;
         }
 
         .search-box input {
             flex: 1;
+
             border: none;
             outline: none;
+
             padding: 17px 18px;
+
             font-size: 16px;
+
             color: #111827;
+
             background: transparent;
         }
 
@@ -137,183 +176,274 @@
 
         .search-btn {
             border: none;
+
             background: #2563eb;
-            color: white;
+
+            color: #ffffff;
+
             padding: 0 28px;
+
             border-radius: 11px;
+
             font-size: 16px;
+
             font-weight: 700;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
 
         .search-btn:hover {
             background: #1d4ed8;
+
             transform: translateY(-1px);
         }
 
+
         /* SEARCH RESULT */
+
         .search-result {
             max-width: 700px;
+
             margin: 18px auto 0;
+
             text-align: left;
         }
 
         .result-card {
             background: #ffffff;
+
             border: 1px solid #dbeafe;
+
             border-radius: 14px;
+
             padding: 18px 20px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.06);
         }
 
         .result-info h3 {
             color: #111827;
+
             margin-bottom: 5px;
         }
 
         .result-info p {
             margin: 0;
+
             font-size: 14px;
+
             color: #6b7280;
         }
 
         .open-btn {
             text-decoration: none;
+
             background: #2563eb;
+
             color: #ffffff;
+
             padding: 11px 18px;
+
             border-radius: 9px;
+
             font-size: 14px;
+
             font-weight: 700;
+
             white-space: nowrap;
+        }
+
+        .open-btn:hover {
+            background: #1d4ed8;
         }
 
         .not-found {
             background: #ffffff;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 14px;
+
             padding: 18px;
+
             color: #6b7280;
+
             text-align: center;
         }
 
+
         /* FEATURES */
+
         .features {
             max-width: 1150px;
+
             margin: auto;
+
             padding: 75px 25px;
         }
 
         .section-heading {
             text-align: center;
+
             margin-bottom: 45px;
         }
 
         .section-heading h2 {
             font-size: 34px;
+
             color: #111827;
+
             margin-bottom: 12px;
         }
 
         .section-heading p {
             color: #6b7280;
+
             font-size: 16px;
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 25px;
         }
 
         .feature-card {
             background: #ffffff;
+
             padding: 30px 25px;
+
             border-radius: 16px;
+
             border: 1px solid #e5e7eb;
+
             text-align: center;
+
             transition: 0.2s;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0, 0, 0, 0.07);
         }
 
         .feature-icon {
             width: 55px;
             height: 55px;
+
             margin: 0 auto 18px;
+
             border-radius: 14px;
+
             background: #eff6ff;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             font-size: 25px;
         }
 
         .feature-card h3 {
             margin-bottom: 10px;
+
             color: #111827;
         }
 
         .feature-card p {
             color: #6b7280;
+
             line-height: 1.6;
+
             font-size: 14px;
         }
 
+
         /* ABOUT */
+
         .about {
             background: #ffffff;
+
             padding: 70px 25px;
+
             border-top: 1px solid #e5e7eb;
+
             border-bottom: 1px solid #e5e7eb;
         }
 
         .about-content {
             max-width: 800px;
+
             margin: auto;
+
             text-align: center;
         }
 
         .about h2 {
             font-size: 34px;
+
             color: #111827;
+
             margin-bottom: 18px;
         }
 
         .about p {
             color: #6b7280;
+
             line-height: 1.8;
+
             font-size: 16px;
         }
 
+
         /* FOOTER */
+
         footer {
             background: #111827;
+
             color: #ffffff;
+
             text-align: center;
+
             padding: 28px 20px;
         }
 
         footer .footer-logo {
             font-size: 22px;
+
             font-weight: 800;
+
             margin-bottom: 8px;
         }
 
         footer p {
             color: #9ca3af;
+
             font-size: 13px;
         }
 
+
         /* MOBILE */
+
         @media (max-width: 768px) {
 
             .nav-container {
@@ -330,6 +460,7 @@
 
             .hero {
                 min-height: 580px;
+
                 padding: 55px 18px;
             }
 
@@ -347,22 +478,27 @@
 
             .search-box input {
                 padding: 15px 12px;
+
                 font-size: 14px;
+
                 min-width: 0;
             }
 
             .search-btn {
                 padding: 0 18px;
+
                 font-size: 14px;
             }
 
             .result-card {
                 flex-direction: column;
+
                 align-items: flex-start;
             }
 
             .open-btn {
                 width: 100%;
+
                 text-align: center;
             }
 
@@ -375,6 +511,7 @@
                 font-size: 28px;
             }
         }
+
 
         @media (max-width: 480px) {
 
@@ -402,51 +539,91 @@
                 height: 48px;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
+
     <!-- NAVBAR -->
+
     <nav class="navbar">
+
         <div class="nav-container">
 
-            <a href="index.html" class="logo">
+            <a
+                href="index.html"
+                class="logo"
+            >
                 StudyMint
             </a>
 
+
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#search">Search</a>
-                <a href="#about">About</a>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="#search">
+                    Search
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
             </div>
 
         </div>
+
     </nav>
 
 
+
     <!-- HERO -->
+
     <section class="hero">
 
         <div class="hero-content">
 
+
             <div class="hero-badge">
+
                 📚 Study Smarter. Learn Better.
+
             </div>
 
+
             <h1>
+
                 Your Study,<br>
-                <span>Simplified.</span>
+
+                <span>
+                    Simplified.
+                </span>
+
             </h1>
 
+
             <p>
-                Find your course, assignments and study materials
-                quickly and easily with StudyMint.
+
+                Find your course, assignments and
+                study materials quickly and easily
+                with StudyMint.
+
             </p>
 
 
+
             <!-- SEARCH -->
-            <div id="search" class="search-box">
+
+            <div
+                id="search"
+                class="search-box"
+            >
 
                 <input
                     type="text"
@@ -455,36 +632,54 @@
                     autocomplete="off"
                 >
 
-                <button class="search-btn" onclick="searchCourse()">
+
+                <button
+                    class="search-btn"
+                    onclick="searchCourse()"
+                >
                     Search
                 </button>
 
             </div>
 
 
+
             <!-- SEARCH RESULT -->
-            <div id="searchResult" class="search-result"></div>
+
+            <div
+                id="searchResult"
+                class="search-result"
+            ></div>
+
 
         </div>
 
     </section>
 
 
+
     <!-- FEATURES -->
+
     <section class="features">
+
 
         <div class="section-heading">
 
-            <h2>Why StudyMint?</h2>
+            <h2>
+                Why StudyMint?
+            </h2>
 
             <p>
-                Everything you need for a simpler study experience.
+                Everything you need for a simpler
+                study experience.
             </p>
 
         </div>
 
 
+
         <div class="feature-grid">
+
 
             <div class="feature-card">
 
@@ -492,7 +687,9 @@
                     🔎
                 </div>
 
-                <h3>Easy Search</h3>
+                <h3>
+                    Easy Search
+                </h3>
 
                 <p>
                     Search your course code or subject
@@ -502,20 +699,24 @@
             </div>
 
 
+
             <div class="feature-card">
 
                 <div class="feature-icon">
                     📄
                 </div>
 
-                <h3>Solved Assignments</h3>
+                <h3>
+                    Solved Assignments
+                </h3>
 
                 <p>
-                    Access properly prepared solved assignments
-                    for your courses.
+                    Access properly prepared solved
+                    assignments for your courses.
                 </p>
 
             </div>
+
 
 
             <div class="feature-card">
@@ -524,7 +725,9 @@
                     ⚡
                 </div>
 
-                <h3>Simple & Fast</h3>
+                <h3>
+                    Simple & Fast
+                </h3>
 
                 <p>
                     A clean and simple platform designed
@@ -533,23 +736,34 @@
 
             </div>
 
+
         </div>
 
     </section>
 
 
+
     <!-- ABOUT -->
-    <section class="about" id="about">
+
+    <section
+        class="about"
+        id="about"
+    >
 
         <div class="about-content">
 
-            <h2>About StudyMint</h2>
+            <h2>
+                About StudyMint
+            </h2>
 
             <p>
-                StudyMint is an independent educational platform
-                created to make study materials and solved assignments
-                easier to find and access. Search for your course
-                and get started with your study material.
+
+                StudyMint is an independent educational
+                platform created to make study materials
+                and solved assignments easier to find
+                and access. Search for your course and
+                get started with your study material.
+
             </p>
 
         </div>
@@ -557,7 +771,9 @@
     </section>
 
 
+
     <!-- FOOTER -->
+
     <footer>
 
         <div class="footer-logo">
@@ -571,142 +787,190 @@
     </footer>
 
 
+
     <!-- SEARCH SCRIPT -->
+
     <script>
 
-        const courses = {
 
-            "bhdae182": {
-                code: "BHDAE-182",
-                title: "BHDAE-182",
-                page: "bhdae182.html"
-            },
+        /*
+         * All courses use ONE universal page:
+         *
+         * course.html?course=COURSE-CODE
+         */
 
-            "bpsc104": {
+        const courses = [
+
+            {
                 code: "BPSC-104",
-                title: "भारतीय राजनीतिक प्रक्रिया",
-                page: "bpsc104.html"
+                title: "भारतीय राजनीतिक प्रक्रिया"
             },
 
-            "bpsc105": {
+            {
                 code: "BPSC-105",
-                title: "तुलनात्मक सरकार और राजनीति का परिचय",
-                page: "bpsc105.html"
+                title: "तुलनात्मक सरकार और राजनीति का परिचय"
             },
 
-            "bsom162": {
+            {
                 code: "BSOM-162",
-                title: "भारतीय समाज समझ",
-                page: "bsom162.html"
+                title: "भारतीय समाज समझ"
             },
 
-            "bsss183": {
+            {
                 code: "BSSS-183",
-                title: "जीवन कौशल जानकारियाँ",
-                page: "bsss183.html"
+                title: "जीवन कौशल जानकारियाँ"
+            },
+
+            {
+                code: "BHDAE-182",
+                title: "BHDAE-182"
             }
 
-        };
+        ];
+
 
 
         function searchCourse() {
 
+
             const input =
-                document.getElementById("courseSearch");
+                document.getElementById(
+                    "courseSearch"
+                );
+
 
             const result =
-                document.getElementById("searchResult");
+                document.getElementById(
+                    "searchResult"
+                );
+
 
             const search =
-                input.value.trim().toLowerCase();
+                input.value
+                    .trim()
+                    .toLowerCase();
+
 
 
             if (search === "") {
 
                 result.innerHTML = `
+
                     <div class="not-found">
-                        Please enter a course code or subject name.
+
+                        Please enter a course code
+                        or subject name.
+
                     </div>
+
                 `;
 
                 return;
             }
 
 
-            let foundCourse = null;
+
+            const cleanSearch =
+                search.replace(
+                    /[^a-z0-9]/g,
+                    ""
+                );
 
 
-            for (const key in courses) {
 
-                const course = courses[key];
-
-                const code =
-                    course.code.toLowerCase();
-
-                const title =
-                    course.title.toLowerCase();
-
-                const cleanSearch =
-                    search.replace(/[^a-z0-9]/g, "");
+            const foundCourses =
+                courses.filter(function(course) {
 
 
-                const cleanCode =
-                    code.replace(/[^a-z0-9]/g, "");
+                    const code =
+                        course.code.toLowerCase();
 
 
-                if (
-                    code.includes(search) ||
-                    title.includes(search) ||
-                    cleanCode.includes(cleanSearch)
-                ) {
-
-                    foundCourse = course;
-                    break;
-
-                }
-
-            }
+                    const title =
+                        course.title.toLowerCase();
 
 
-            if (foundCourse) {
+                    const cleanCode =
+                        code.replace(
+                            /[^a-z0-9]/g,
+                            ""
+                        );
 
-                result.innerHTML = `
 
-                    <div class="result-card">
 
-                        <div class="result-info">
+                    return (
 
-                            <h3>
-                                ${foundCourse.code}
-                            </h3>
+                        code.includes(search) ||
 
-                            <p>
-                                ${foundCourse.title}
-                            </p>
+                        title.includes(search) ||
 
-                        </div>
+                        cleanCode.includes(
+                            cleanSearch
+                        )
 
-                        <a
-                            href="${foundCourse.page}"
-                            class="open-btn"
-                        >
-                            Open Course →
-                        </a>
+                    );
 
-                    </div>
+                });
 
-                `;
+
+
+            if (foundCourses.length > 0) {
+
+
+                result.innerHTML =
+                    foundCourses.map(
+                        function(course) {
+
+                            return `
+
+                                <div
+                                    class="result-card"
+                                >
+
+                                    <div
+                                        class="result-info"
+                                    >
+
+                                        <h3>
+                                            ${course.code}
+                                        </h3>
+
+                                        <p>
+                                            ${course.title}
+                                        </p>
+
+                                    </div>
+
+
+                                    <a
+                                        href="course.html?course=${encodeURIComponent(course.code)}"
+                                        class="open-btn"
+                                    >
+                                        Open Course →
+                                    </a>
+
+                                </div>
+
+                            `;
+
+                        }
+                    ).join("");
+
 
             } else {
+
 
                 result.innerHTML = `
 
                     <div class="not-found">
 
-                        ❌ Course not found.<br>
+                        ❌ Course not found.
+
+                        <br>
 
                         <small>
-                            Please check the course code or subject name.
+                            Please check the course
+                            code or subject name.
                         </small>
 
                     </div>
@@ -718,19 +982,27 @@
         }
 
 
+
         /* ENTER KEY SUPPORT */
 
         document
             .getElementById("courseSearch")
-            .addEventListener("keypress", function(event) {
+            .addEventListener(
+                "keypress",
+                function(event) {
 
-                if (event.key === "Enter") {
-                    searchCourse();
+                    if (event.key === "Enter") {
+
+                        searchCourse();
+
+                    }
+
                 }
+            );
 
-            });
 
     </script>
+
 
 </body>
 </html>
