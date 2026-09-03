@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course | StudyMint</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .home-link:hover {
+            color: #2563eb;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .course-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+
+        .info-box span {
+            color: #111827;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .paper-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            font-size: 23px;
+            color: #111827;
+            margin-bottom: 18px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .feature {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            color: #4b5563;
+        }
+
+        .buy-section {
+            margin-top: 35px;
+            padding: 28px;
+            border-radius: 15px;
+            background: #eff6ff;
+            text-align: center;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: #ffffff;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 10px;
+            color: #9a3412;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .error {
+            text-align: center;
+            background: #ffffff;
+            padding: 50px 25px;
+            border-radius: 18px;
+        }
+
+        .error h1 {
+            color: #dc2626;
+            font-size: 30px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        footer {
+            text-align: center;
+            background: #111827;
+            color: #ffffff;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        @media (max-width: 750px) {
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .course-card {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 16px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .home-link {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                StudyMint
+            </a>
+
+            <a href="index.html" class="home-link">
+                ← Back to Home
+            </a>
+
+        </div>
+    </nav>
+
+
+    <main class="container">
+
+        <div id="courseContainer"></div>
+
+    </main>
+
+
+    <footer>
+
+        <strong>StudyMint</strong>
+
+        <p>
+            © 2026 StudyMint. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        const courses = {
+
+            "BPSC-104": {
+                title: "भारतीय राजनीतिक प्रक्रिया",
+                english: "Indian Political Process",
+                session: "2025–26",
+                programme: "BA Political Science",
+                assignment: "Solved Assignment",
+                language: "Hindi",
+                paper: "bpsc104-question-paper.pdf"
+            },
+
+            "BPSC-105": {
+                title: "तुलनात्मक सरकार और राजनीति का परिचय",
+                english: "Introduction to Comparative Government and Politics",
+                session: "2025–26",
+                programme: "BA Political Science",
+                assignment: "Solved Assignment",
+                language: "Hindi",
+                paper: "bpsc105-question-paper.pdf"
+            },
+
+            "BSOM-162": {
+                title: "भारतीय समाज समझ",
+                english: "Understanding Indian Society",
+                session: "2025–26",
+                programme: "IGNOU",
+                assignment: "Solved Assignment",
+                language: "Hindi",
+                paper: "bsom162-question-paper.pdf"
+            },
+
+            "BSSS-183": {
+                title: "जीवन कौशल जानकारियाँ",
+                english: "Life Skills",
+                session: "2025–26",
+                programme: "IGNOU",
+                assignment: "Solved Assignment",
+                language: "Hindi",
+                paper: "bsss183-question-paper.pdf"
+            },
+
+            "BHDAE-182": {
+                title: "BHDAE-182",
+                english: "BHDAE-182",
+                session: "2025–26",
+                programme: "IGNOU",
+                assignment: "Solved Assignment",
+                language: "Hindi",
+                paper: "bhdae182-question-paper.pdf"
+            }
+
+        };
+
+
+        const params =
+            new URLSearchParams(window.location.search);
+
+        const requestedCourse =
+            params.get("course");
+
+
+        const courseCode =
+            requestedCourse
+                ? requestedCourse.toUpperCase()
+                : "";
+
+
+        const course =
+            courses[courseCode];
+
+
+        const container =
+            document.getElementById("courseContainer");
+
+
+        if (!course) {
+
+            container.innerHTML = `
+
+                <div class="error">
+
+                    <h1>
+                        Course Not Found
+                    </h1>
+
+                    <p>
+                        Please check the course code and try again.
+                    </p>
+
+                    <a
+                        href="index.html"
+                        class="back-btn"
+                    >
+                        ← Back to Home
+                    </a>
+
+                </div>
+
+            `;
+
+        } else {
+
+            document.title =
+                `${courseCode} | StudyMint`;
+
+
+            container.innerHTML = `
+
+                <div class="course-card">
+
+                    <span class="tag">
+                        SOLVED ASSIGNMENT
+                    </span>
+
+                    <h1>
+                        ${courseCode}
+                    </h1>
+
+                    <p class="subtitle">
+                        ${course.title}<br>
+                        ${course.english}
+                    </p>
+
+
+                    <div class="info-grid">
+
+                        <div class="info-box">
+                            <strong>Course Code</strong>
+                            <span>${courseCode}</span>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>Programme</strong>
+                            <span>${course.programme}</span>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>Session</strong>
+                            <span>${course.session}</span>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>Language</strong>
+                            <span>${course.language}</span>
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="${course.paper}"
+                        target="_blank"
+                        class="paper-link"
+                    >
+                        📄 View Question Paper
+                    </a>
+
+
+                    <div class="section">
+
+                        <h2>
+                            What's Included?
+                        </h2>
+
+                        <div class="features">
+
+                            <div class="feature">
+                                ✓ Complete solved assignment
+                            </div>
+
+                            <div class="feature">
+                                ✓ All important questions covered
+                            </div>
+
+                            <div class="feature">
+                                ✓ Easy-to-understand answers
+                            </div>
+
+                            <div class="feature">
+                                ✓ Ready for study and reference
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="buy-section">
+
+                        <div class="price">
+                            ₹29
+                        </div>
+
+                        <a
+                            href="payment.html?course=${encodeURIComponent(courseCode)}"
+                            class="buy-btn"
+                        >
+                            Buy Now — ₹29
+                        </a>
+
+                    </div>
+
+
+                    <div class="notice">
+
+                        <strong>Notice:</strong>
+                        StudyMint is an independent educational
+                        platform. The materials provided are
+                        prepared for educational and reference
+                        purposes.
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    </script>
+
+</body>
+</html>
