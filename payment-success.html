@@ -1,210 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Payment Successful | StudyMint</title>
+    <title>Payment Successful | StudyMint</title>
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-body {
-    background: #f5f7fb;
-    color: #172033;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .success-card {
+            width: 100%;
+            max-width: 550px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 55px 35px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
 
-.card {
-    background: white;
-    width: 90%;
-    max-width: 550px;
-    padding: 45px 30px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-}
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 25px;
+            background: #4ade80;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.25);
+        }
 
-.icon {
-    font-size: 60px;
-    margin-bottom: 15px;
-}
+        h1 {
+            color: #16a34a;
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
 
-h1 {
-    color: #16a34a;
-    margin-bottom: 15px;
-}
+        .message {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
 
-p {
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
+        .download-btn,
+        .home-btn {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 9px;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.download {
-    display: none;
-    margin-top: 20px;
-    padding: 14px 25px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 9px;
-}
+        .download-btn {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            margin-bottom: 15px;
+        }
 
-.download:hover {
-    background: #1d4ed8;
-}
+        .download-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
 
-</style>
+        .home-btn {
+            background: #ffffff;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
 
+        .home-btn:hover {
+            background: #eff6ff;
+        }
+
+        .loading {
+            color: #64748b;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 500px) {
+
+            .success-card {
+                padding: 45px 22px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .download-btn,
+            .home-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="card">
+    <div class="success-card">
 
-    <div class="icon" id="icon">⏳</div>
+        <div class="success-icon">
+            ✓
+        </div>
 
-    <h1 id="title">
-        Verifying Payment...
-    </h1>
+        <h1>
+            Payment Successful!
+        </h1>
 
-    <p id="message">
-        Please wait while we verify your payment.
-    </p>
+        <p class="message" id="courseMessage">
+            Checking your payment...
+        </p>
 
-    <a
-        href="#"
-        class="download"
-        id="download"
-        target="_blank"
-    >
-        Download Assignment
-    </a>
+        <div id="downloadArea"></div>
 
-</div>
+        <div id="statusMessage"></div>
+
+    </div>
 
 
-<script>
+    <script>
 
-async function verifyPayment() {
+        const params = new URLSearchParams(window.location.search);
 
-    const params =
-        new URLSearchParams(window.location.search);
+        const orderId = params.get("order_id");
 
-    const orderId =
-        params.get("order_id");
+        const courseMessage =
+            document.getElementById("courseMessage");
 
+        const downloadArea =
+            document.getElementById("downloadArea");
 
-    if (!orderId) {
-
-        showFailed("Invalid payment order.");
-
-        return;
-
-    }
+        const statusMessage =
+            document.getElementById("statusMessage");
 
 
-    try {
+        async function verifyPayment() {
 
-        const response = await fetch(
-            "/verify-payment/" +
-            encodeURIComponent(orderId)
-        );
+            if (!orderId) {
 
+                courseMessage.innerText =
+                    "Payment information could not be found.";
 
-        const data =
-            await response.json();
+                statusMessage.innerHTML = `
+                    <p class="error">
+                        Invalid order.
+                    </p>
+                `;
 
-
-        if (data.success === true) {
-
-            const course =
-                data.course || "BPSC-105";
-
-
-            document.getElementById("icon")
-                .innerText = "✅";
+                return;
+            }
 
 
-            document.getElementById("title")
-                .innerText = "Payment Successful!";
+            try {
+
+                const response =
+                    await fetch(`/verify-payment/${orderId}`);
+
+                const data =
+                    await response.json();
 
 
-            document.getElementById("message")
-                .innerText =
-                "Your " +
-                course +
-                " Solved Assignment is ready.";
+                if (data.success) {
+
+                    const course =
+                        data.course || "your course";
 
 
-            const downloadButton =
-                document.getElementById("download");
+                    courseMessage.innerText =
+                        `Your ${course} Solved Assignment is ready.`;
 
 
-            downloadButton.href =
-                "/download-assignment/" +
-                encodeURIComponent(orderId);
+                    downloadArea.innerHTML = `
 
+                        <a
+                            href="/download-assignment/${orderId}"
+                            class="download-btn"
+                        >
+                            Download Assignment
+                        </a>
 
-            downloadButton.style.display =
-                "inline-block";
+                        <br>
 
+                        <a
+                            href="index.html"
+                            class="home-btn"
+                        >
+                            ← Back to Home
+                        </a>
 
-        } else {
+                    `;
 
-            showFailed(
-                "Payment was not completed successfully."
-            );
+                } else {
+
+                    courseMessage.innerText =
+                        "Your payment could not be verified yet.";
+
+                    statusMessage.innerHTML = `
+                        <p class="error">
+                            Please wait a moment and try again.
+                        </p>
+
+                        <br>
+
+                        <a
+                            href="index.html"
+                            class="home-btn"
+                        >
+                            ← Back to Home
+                        </a>
+                    `;
+
+                }
+
+            } catch (error) {
+
+                courseMessage.innerText =
+                    "Something went wrong while verifying your payment.";
+
+                statusMessage.innerHTML = `
+                    <p class="error">
+                        Please try again later.
+                    </p>
+
+                    <br>
+
+                    <a
+                        href="index.html"
+                        class="home-btn"
+                    >
+                        ← Back to Home
+                    </a>
+                `;
+
+            }
 
         }
 
 
-    } catch (error) {
+        verifyPayment();
 
-        console.error(error);
-
-
-        showFailed(
-            "Unable to verify payment. Please try again."
-        );
-
-    }
-
-}
-
-
-function showFailed(message) {
-
-    document.getElementById("icon")
-        .innerText = "❌";
-
-
-    document.getElementById("title")
-        .innerText = "Payment Not Verified";
-
-
-    document.getElementById("message")
-        .innerText = message;
-
-}
-
-
-verifyPayment();
-
-</script>
-
+    </script>
 
 </body>
-
 </html>
