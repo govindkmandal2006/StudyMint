@@ -1,1008 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>StudyMint | Your Study, Simplified</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f9fc;
-            color: #1f2937;
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-            width: 100%;
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1150px;
-            margin: auto;
-            padding: 18px 25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            color: #2563eb;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #374151;
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-        }
-
-
-        /* HERO */
-
-        .hero {
-            min-height: 620px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 70px 20px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #eef5ff 0%,
-                    #f7f9fc 100%
-                );
-        }
-
-        .hero-content {
-            width: 100%;
-            max-width: 850px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-
-            padding: 8px 16px;
-
-            border-radius: 30px;
-
-            background: #dbeafe;
-            color: #2563eb;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            margin-bottom: 22px;
-        }
-
-        .hero h1 {
-            font-size: 58px;
-            line-height: 1.1;
-
-            color: #111827;
-
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #2563eb;
-        }
-
-        .hero p {
-            font-size: 19px;
-            line-height: 1.7;
-
-            color: #6b7280;
-
-            max-width: 650px;
-
-            margin: 0 auto 35px;
-        }
-
-
-        /* SEARCH */
-
-        .search-box {
-            max-width: 700px;
-
-            margin: auto;
-
-            background: #ffffff;
-
-            padding: 10px;
-
-            border-radius: 16px;
-
-            display: flex;
-
-            gap: 10px;
-
-            box-shadow:
-                0 15px 40px
-                rgba(37, 99, 235, 0.15);
-
-            border: 1px solid #dbeafe;
-        }
-
-        .search-box input {
-            flex: 1;
-
-            border: none;
-            outline: none;
-
-            padding: 17px 18px;
-
-            font-size: 16px;
-
-            color: #111827;
-
-            background: transparent;
-        }
-
-        .search-box input::placeholder {
-            color: #9ca3af;
-        }
-
-        .search-btn {
-            border: none;
-
-            background: #2563eb;
-
-            color: #ffffff;
-
-            padding: 0 28px;
-
-            border-radius: 11px;
-
-            font-size: 16px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .search-btn:hover {
-            background: #1d4ed8;
-
-            transform: translateY(-1px);
-        }
-
-
-        /* SEARCH RESULT */
-
-        .search-result {
-            max-width: 700px;
-
-            margin: 18px auto 0;
-
-            text-align: left;
-        }
-
-        .result-card {
-            background: #ffffff;
-
-            border: 1px solid #dbeafe;
-
-            border-radius: 14px;
-
-            padding: 18px 20px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0, 0, 0, 0.06);
-        }
-
-        .result-info h3 {
-            color: #111827;
-
-            margin-bottom: 5px;
-        }
-
-        .result-info p {
-            margin: 0;
-
-            font-size: 14px;
-
-            color: #6b7280;
-        }
-
-        .open-btn {
-            text-decoration: none;
-
-            background: #2563eb;
-
-            color: #ffffff;
-
-            padding: 11px 18px;
-
-            border-radius: 9px;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            white-space: nowrap;
-        }
-
-        .open-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .not-found {
-            background: #ffffff;
-
-            border: 1px solid #e5e7eb;
-
-            border-radius: 14px;
-
-            padding: 18px;
-
-            color: #6b7280;
-
-            text-align: center;
-        }
-
-
-        /* FEATURES */
-
-        .features {
-            max-width: 1150px;
-
-            margin: auto;
-
-            padding: 75px 25px;
-        }
-
-        .section-heading {
-            text-align: center;
-
-            margin-bottom: 45px;
-        }
-
-        .section-heading h2 {
-            font-size: 34px;
-
-            color: #111827;
-
-            margin-bottom: 12px;
-        }
-
-        .section-heading p {
-            color: #6b7280;
-
-            font-size: 16px;
-        }
-
-        .feature-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 25px;
-        }
-
-        .feature-card {
-            background: #ffffff;
-
-            padding: 30px 25px;
-
-            border-radius: 16px;
-
-            border: 1px solid #e5e7eb;
-
-            text-align: center;
-
-            transition: 0.2s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 12px 30px
-                rgba(0, 0, 0, 0.07);
-        }
-
-        .feature-icon {
-            width: 55px;
-            height: 55px;
-
-            margin: 0 auto 18px;
-
-            border-radius: 14px;
-
-            background: #eff6ff;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 25px;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 10px;
-
-            color: #111827;
-        }
-
-        .feature-card p {
-            color: #6b7280;
-
-            line-height: 1.6;
-
-            font-size: 14px;
-        }
-
-
-        /* ABOUT */
-
-        .about {
-            background: #ffffff;
-
-            padding: 70px 25px;
-
-            border-top: 1px solid #e5e7eb;
-
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .about-content {
-            max-width: 800px;
-
-            margin: auto;
-
-            text-align: center;
-        }
-
-        .about h2 {
-            font-size: 34px;
-
-            color: #111827;
-
-            margin-bottom: 18px;
-        }
-
-        .about p {
-            color: #6b7280;
-
-            line-height: 1.8;
-
-            font-size: 16px;
-        }
-
-
-        /* FOOTER */
-
-        footer {
-            background: #111827;
-
-            color: #ffffff;
-
-            text-align: center;
-
-            padding: 28px 20px;
-        }
-
-        footer .footer-logo {
-            font-size: 22px;
-
-            font-weight: 800;
-
-            margin-bottom: 8px;
-        }
-
-        footer p {
-            color: #9ca3af;
-
-            font-size: 13px;
-        }
-
-
-        /* MOBILE */
-
-        @media (max-width: 768px) {
-
-            .nav-container {
-                padding: 16px 18px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .nav-links a {
-                font-size: 13px;
-            }
-
-            .hero {
-                min-height: 580px;
-
-                padding: 55px 18px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .search-box {
-                padding: 8px;
-            }
-
-            .search-box input {
-                padding: 15px 12px;
-
-                font-size: 14px;
-
-                min-width: 0;
-            }
-
-            .search-btn {
-                padding: 0 18px;
-
-                font-size: 14px;
-            }
-
-            .result-card {
-                flex-direction: column;
-
-                align-items: flex-start;
-            }
-
-            .open-btn {
-                width: 100%;
-
-                text-align: center;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-heading h2,
-            .about h2 {
-                font-size: 28px;
-            }
-        }
-
-
-        @media (max-width: 480px) {
-
-            .logo {
-                font-size: 21px;
-            }
-
-            .nav-links {
-                gap: 10px;
-            }
-
-            .nav-links a {
-                font-size: 12px;
-            }
-
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .search-box {
-                flex-direction: column;
-            }
-
-            .search-btn {
-                height: 48px;
-            }
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>StudyMint | Your Study, Simplified</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 85px 20px 65px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 15px;
+      color: #111827;
+    }
+
+    .hero h1 span {
+      color: #2563eb;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 35px;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+      display: flex;
+      background: white;
+      padding: 8px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 16px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 0 25px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      display: none;
+      max-width: 650px;
+      margin: 20px auto 0;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: left;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .result p {
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    .result a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .features {
+      max-width: 1000px;
+      margin: 20px auto 70px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .about {
+      background: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .about h2 {
+      margin-bottom: 15px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: auto;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .footer-links {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 60px 15px 45px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .search-box {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .search-box button {
+        padding: 14px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <header>
+    <div class="logo">StudyMint</div>
 
-    <!-- NAVBAR -->
-
-    <nav class="navbar">
-
-        <div class="nav-container">
-
-            <a
-                href="index.html"
-                class="logo"
-            >
-                StudyMint
-            </a>
-
-
-            <div class="nav-links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="#search">
-                    Search
-                </a>
-
-                <a href="#about">
-                    About
-                </a>
-
-            </div>
-
-        </div>
-
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#search">Search</a>
+      <a href="#about">About</a>
     </nav>
+  </header>
 
 
+  <section class="hero" id="search">
 
-    <!-- HERO -->
+    <h1>Your Study, <span>Simplified.</span></h1>
 
-    <section class="hero">
+    <p>
+      Find your course and get quality solved assignments easily.
+    </p>
 
-        <div class="hero-content">
+    <div class="search-box">
+      <input
+        type="text"
+        id="courseInput"
+        placeholder="Search course code or subject..."
+      >
 
+      <button onclick="searchCourse()">Search</button>
+    </div>
 
-            <div class="hero-badge">
+    <div class="result" id="result">
+      <p id="resultText"></p>
+      <a id="courseLink" href="#">Open Course →</a>
+    </div>
 
-                📚 Study Smarter. Learn Better.
+  </section>
 
-            </div>
 
+  <section class="features">
 
-            <h1>
+    <div class="feature">
+      <h3>📚 Quality Material</h3>
+      <p>
+        Helpful solved assignments prepared for students.
+      </p>
+    </div>
 
-                Your Study,<br>
+    <div class="feature">
+      <h3>⚡ Easy Access</h3>
+      <p>
+        Search your course and access your study material quickly.
+      </p>
+    </div>
 
-                <span>
-                    Simplified.
-                </span>
+    <div class="feature">
+      <h3>💳 Simple Payment</h3>
+      <p>
+        Secure and simple online payment experience.
+      </p>
+    </div>
 
-            </h1>
+  </section>
 
 
-            <p>
+  <section class="about" id="about">
 
-                Find your course, assignments and
-                study materials quickly and easily
-                with StudyMint.
+    <h2>About StudyMint</h2>
 
-            </p>
+    <p>
+      StudyMint is an educational platform created to make study
+      materials and solved assignments easier to find and access.
+    </p>
 
+  </section>
 
 
-            <!-- SEARCH -->
+  <footer>
 
-            <div
-                id="search"
-                class="search-box"
-            >
+    <div class="footer-links">
+      <a href="contact.html">Contact Us</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="refunds.html">Refund & Cancellation</a>
+    </div>
 
-                <input
-                    type="text"
-                    id="courseSearch"
-                    placeholder="Search course code or subject..."
-                    autocomplete="off"
-                >
+    <p>© 2026 StudyMint. All rights reserved.</p>
 
+  </footer>
 
-                <button
-                    class="search-btn"
-                    onclick="searchCourse()"
-                >
-                    Search
-                </button>
 
-            </div>
+  <script>
 
+    const courses = {
+      "BPSC-104": "BPSC-104",
+      "BPSC-105": "BPSC-105",
+      "BSOM-162": "BSOM-162",
+      "BSSS-183": "BSSS-183",
+      "BHDAE-182": "BHDAE-182",
 
+      "भारतीय राजनीतिक प्रक्रिया": "BPSC-104",
+      "तुलनात्मक सरकार और राजनीति का परिचय": "BPSC-105",
+      "भारतीय समाज समझ": "BSOM-162",
+      "जीवन कौशल जानकारियाँ": "BSSS-183",
+      "हिंदी भाषा और संप्रेषण": "BHDAE-182"
+    };
 
-            <!-- SEARCH RESULT -->
 
-            <div
-                id="searchResult"
-                class="search-result"
-            ></div>
+    function searchCourse() {
 
+      const input = document
+        .getElementById("courseInput")
+        .value
+        .trim();
 
-        </div>
+      const result = document.getElementById("result");
+      const resultText = document.getElementById("resultText");
+      const courseLink = document.getElementById("courseLink");
 
-    </section>
+      const key = input.toUpperCase();
 
+      let course = courses[key];
 
+      if (!course) {
 
-    <!-- FEATURES -->
+        const found = Object.keys(courses).find(
+          item => item.toLowerCase() === input.toLowerCase()
+        );
 
-    <section class="features">
+        if (found) {
+          course = courses[found];
+        }
+      }
 
+      if (course) {
 
-        <div class="section-heading">
+        result.style.display = "block";
 
-            <h2>
-                Why StudyMint?
-            </h2>
+        resultText.textContent =
+          "Course found: " + course;
 
-            <p>
-                Everything you need for a simpler
-                study experience.
-            </p>
+        courseLink.href =
+          "course.html?course=" +
+          encodeURIComponent(course);
 
-        </div>
+      } else {
 
+        result.style.display = "block";
 
+        resultText.textContent =
+          "Course not found. Please check the course code.";
 
-        <div class="feature-grid">
+        courseLink.href = "#";
+      }
+    }
 
 
-            <div class="feature-card">
+    document
+      .getElementById("courseInput")
+      .addEventListener("keypress", function(event) {
 
-                <div class="feature-icon">
-                    🔎
-                </div>
-
-                <h3>
-                    Easy Search
-                </h3>
-
-                <p>
-                    Search your course code or subject
-                    and find the right study material quickly.
-                </p>
-
-            </div>
-
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    📄
-                </div>
-
-                <h3>
-                    Solved Assignments
-                </h3>
-
-                <p>
-                    Access properly prepared solved
-                    assignments for your courses.
-                </p>
-
-            </div>
-
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    ⚡
-                </div>
-
-                <h3>
-                    Simple & Fast
-                </h3>
-
-                <p>
-                    A clean and simple platform designed
-                    to make finding study material easier.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ABOUT -->
-
-    <section
-        class="about"
-        id="about"
-    >
-
-        <div class="about-content">
-
-            <h2>
-                About StudyMint
-            </h2>
-
-            <p>
-
-                StudyMint is an independent educational
-                platform created to make study materials
-                and solved assignments easier to find
-                and access. Search for your course and
-                get started with your study material.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="footer-logo">
-            StudyMint
-        </div>
-
-        <p>
-            © 2026 StudyMint. All rights reserved.
-        </p>
-
-    </footer>
-
-
-
-    <!-- SEARCH SCRIPT -->
-
-    <script>
-
-
-        /*
-         * All courses use ONE universal page:
-         *
-         * course.html?course=COURSE-CODE
-         */
-
-        const courses = [
-
-            {
-                code: "BPSC-104",
-                title: "भारतीय राजनीतिक प्रक्रिया"
-            },
-
-            {
-                code: "BPSC-105",
-                title: "तुलनात्मक सरकार और राजनीति का परिचय"
-            },
-
-            {
-                code: "BSOM-162",
-                title: "भारतीय समाज समझ"
-            },
-
-            {
-                code: "BSSS-183",
-                title: "जीवन कौशल जानकारियाँ"
-            },
-
-            {
-                code: "BHDAE-182",
-                title: "BHDAE-182"
-            }
-
-        ];
-
-
-
-        function searchCourse() {
-
-
-            const input =
-                document.getElementById(
-                    "courseSearch"
-                );
-
-
-            const result =
-                document.getElementById(
-                    "searchResult"
-                );
-
-
-            const search =
-                input.value
-                    .trim()
-                    .toLowerCase();
-
-
-
-            if (search === "") {
-
-                result.innerHTML = `
-
-                    <div class="not-found">
-
-                        Please enter a course code
-                        or subject name.
-
-                    </div>
-
-                `;
-
-                return;
-            }
-
-
-
-            const cleanSearch =
-                search.replace(
-                    /[^a-z0-9]/g,
-                    ""
-                );
-
-
-
-            const foundCourses =
-                courses.filter(function(course) {
-
-
-                    const code =
-                        course.code.toLowerCase();
-
-
-                    const title =
-                        course.title.toLowerCase();
-
-
-                    const cleanCode =
-                        code.replace(
-                            /[^a-z0-9]/g,
-                            ""
-                        );
-
-
-
-                    return (
-
-                        code.includes(search) ||
-
-                        title.includes(search) ||
-
-                        cleanCode.includes(
-                            cleanSearch
-                        )
-
-                    );
-
-                });
-
-
-
-            if (foundCourses.length > 0) {
-
-
-                result.innerHTML =
-                    foundCourses.map(
-                        function(course) {
-
-                            return `
-
-                                <div
-                                    class="result-card"
-                                >
-
-                                    <div
-                                        class="result-info"
-                                    >
-
-                                        <h3>
-                                            ${course.code}
-                                        </h3>
-
-                                        <p>
-                                            ${course.title}
-                                        </p>
-
-                                    </div>
-
-
-                                    <a
-                                        href="course.html?course=${encodeURIComponent(course.code)}"
-                                        class="open-btn"
-                                    >
-                                        Open Course →
-                                    </a>
-
-                                </div>
-
-                            `;
-
-                        }
-                    ).join("");
-
-
-            } else {
-
-
-                result.innerHTML = `
-
-                    <div class="not-found">
-
-                        ❌ Course not found.
-
-                        <br>
-
-                        <small>
-                            Please check the course
-                            code or subject name.
-                        </small>
-
-                    </div>
-
-                `;
-
-            }
-
+        if (event.key === "Enter") {
+          searchCourse();
         }
 
+      });
 
-
-        /* ENTER KEY SUPPORT */
-
-        document
-            .getElementById("courseSearch")
-            .addEventListener(
-                "keypress",
-                function(event) {
-
-                    if (event.key === "Enter") {
-
-                        searchCourse();
-
-                    }
-
-                }
-            );
-
-
-    </script>
-
+  </script>
 
 </body>
 </html>
