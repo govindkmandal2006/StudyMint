@@ -95,8 +95,6 @@
       cursor: pointer;
     }
 
-    /* SEARCH RESULT */
-
     .result {
       display: none;
       max-width: 650px;
@@ -140,11 +138,6 @@
       padding: 11px 18px;
       border-radius: 9px;
       font-weight: bold;
-      transition: 0.2s;
-    }
-
-    .course-btn:hover {
-      background: #1d4ed8;
     }
 
     .not-found {
@@ -152,8 +145,6 @@
       margin: 0 !important;
       font-weight: 600;
     }
-
-    /* FEATURES */
 
     .features {
       max-width: 1000px;
@@ -181,8 +172,6 @@
       line-height: 1.6;
     }
 
-    /* ABOUT */
-
     .about {
       background: white;
       text-align: center;
@@ -199,8 +188,6 @@
       color: #6b7280;
       line-height: 1.7;
     }
-
-    /* FOOTER */
 
     footer {
       background: #111827;
@@ -224,10 +211,7 @@
       color: white;
     }
 
-    /* MOBILE */
-
     @media (max-width: 700px) {
-
       header {
         padding: 16px 5%;
       }
@@ -272,7 +256,6 @@
 <body>
 
   <header>
-
     <div class="logo">StudyMint</div>
 
     <nav>
@@ -280,7 +263,6 @@
       <a href="#search">Search</a>
       <a href="#about">About</a>
     </nav>
-
   </header>
 
 
@@ -291,7 +273,6 @@
     <p>
       Find your course and get quality solved assignments easily.
     </p>
-
 
     <div class="search-box">
 
@@ -310,7 +291,7 @@
 
     <div class="result" id="result">
 
-      <div class="result-label">
+      <div class="result-label" id="resultLabel">
         COURSE FOUND
       </div>
 
@@ -334,35 +315,24 @@
   <section class="features">
 
     <div class="feature">
-
       <h3>📚 Quality Material</h3>
-
       <p>
         Helpful solved assignments prepared for students.
       </p>
-
     </div>
 
-
     <div class="feature">
-
       <h3>⚡ Easy Access</h3>
-
       <p>
         Search your course and access your study material quickly.
       </p>
-
     </div>
 
-
     <div class="feature">
-
       <h3>💳 Simple Payment</h3>
-
       <p>
         Secure and simple online payment experience.
       </p>
-
     </div>
 
   </section>
@@ -383,28 +353,13 @@
   <footer>
 
     <div class="footer-links">
-
-      <a href="contact.html">
-        Contact Us
-      </a>
-
-      <a href="terms.html">
-        Terms & Conditions
-      </a>
-
-      <a href="refunds.html">
-        Refund & Cancellation
-      </a>
-
-      <a href="privacy.html">
-        Privacy Policy
-      </a>
-
+      <a href="contact.html">Contact Us</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="refunds.html">Refund & Cancellation</a>
+      <a href="privacy.html">Privacy Policy</a>
     </div>
 
-    <p>
-      © 2026 StudyMint. All rights reserved.
-    </p>
+    <p>© 2026 StudyMint. All rights reserved.</p>
 
   </footer>
 
@@ -412,7 +367,6 @@
   <script>
 
     const courses = {
-
       "BPSC-104": "BPSC-104",
       "BPSC-105": "BPSC-105",
       "BSOM-162": "BSOM-162",
@@ -424,28 +378,24 @@
       "भारतीय समाज समझ": "BSOM-162",
       "जीवन कौशल जानकारियाँ": "BSSS-183",
       "हिंदी भाषा और संप्रेषण": "BHDAE-182"
-
     };
 
 
     const courseNames = {
-
-      "BPSC-104":
-        "भारतीय राजनीतिक प्रक्रिया",
-
-      "BPSC-105":
-        "तुलनात्मक सरकार और राजनीति का परिचय",
-
-      "BSOM-162":
-        "भारतीय समाज समझ",
-
-      "BSSS-183":
-        "जीवन कौशल जानकारियाँ",
-
-      "BHDAE-182":
-        "हिंदी भाषा और संप्रेषण"
-
+      "BPSC-104": "भारतीय राजनीतिक प्रक्रिया",
+      "BPSC-105": "तुलनात्मक सरकार और राजनीति का परिचय",
+      "BSOM-162": "भारतीय समाज समझ",
+      "BSSS-183": "जीवन कौशल जानकारियाँ",
+      "BHDAE-182": "हिंदी भाषा और संप्रेषण"
     };
+
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[\s-]/g, "")
+        .trim();
+    }
 
 
     function searchCourse() {
@@ -457,6 +407,9 @@
 
       const result =
         document.getElementById("result");
+
+      const resultLabel =
+        document.getElementById("resultLabel");
 
       const resultTitle =
         document.getElementById("resultTitle");
@@ -471,14 +424,12 @@
       if (!input) {
 
         result.style.display = "block";
-
-        result.querySelector(".result-label").style.display = "none";
+        resultLabel.style.display = "none";
 
         resultTitle.textContent =
           "Please enter a course code.";
 
         resultText.textContent = "";
-
         resultText.className = "not-found";
 
         courseLink.style.display = "none";
@@ -487,39 +438,30 @@
       }
 
 
-      const found = Object.keys(courses).find(
-        item =>
-          item.toLowerCase() === input.toLowerCase()
-      );
+      const normalizedInput =
+        normalize(input);
 
 
-      let course = found
-        ? courses[found]
-        : null;
+      let course = null;
 
 
-      if (!course) {
+      for (const key in courses) {
 
-        const hindiFound =
-          Object.keys(courses).find(
-            item =>
-              item.toLowerCase() === input.toLowerCase()
-          );
+        if (normalize(key) === normalizedInput) {
 
-        if (hindiFound) {
-          course = courses[hindiFound];
+          course = courses[key];
+          break;
+
         }
 
       }
 
 
-      result.style.display = "block";
-
-
       if (course) {
 
-        result.querySelector(".result-label").style.display =
-          "inline-block";
+        result.style.display = "block";
+
+        resultLabel.style.display = "inline-block";
 
         resultTitle.textContent =
           course;
@@ -538,8 +480,9 @@
 
       } else {
 
-        result.querySelector(".result-label").style.display =
-          "none";
+        result.style.display = "block";
+
+        resultLabel.style.display = "none";
 
         resultTitle.textContent =
           "Course not found";
