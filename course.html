@@ -83,7 +83,7 @@
         .subtitle {
             color: #6b7280;
             font-size: 18px;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 30px;
         }
 
@@ -220,6 +220,7 @@
         footer p {
             color: #9ca3af;
             font-size: 13px;
+            margin-top: 6px;
         }
 
         @media (max-width: 750px) {
@@ -264,7 +265,10 @@
 
 <body>
 
+    <!-- NAVBAR -->
+
     <nav class="navbar">
+
         <div class="nav-container">
 
             <a href="index.html" class="logo">
@@ -276,8 +280,11 @@
             </a>
 
         </div>
+
     </nav>
 
+
+    <!-- COURSE -->
 
     <main class="container">
 
@@ -285,6 +292,8 @@
 
     </main>
 
+
+    <!-- FOOTER -->
 
     <footer>
 
@@ -299,6 +308,10 @@
 
     <script>
 
+        /* =====================================
+           ALL COURSES
+        ===================================== */
+
         const courses = {
 
             "BPSC-104": {
@@ -311,6 +324,7 @@
                 paper: "bpsc104-question-paper.pdf"
             },
 
+
             "BPSC-105": {
                 title: "तुलनात्मक सरकार और राजनीति का परिचय",
                 english: "Introduction to Comparative Government and Politics",
@@ -320,6 +334,7 @@
                 language: "Hindi",
                 paper: "bpsc105-question-paper.pdf"
             },
+
 
             "BSOM-162": {
                 title: "भारतीय समाज समझ",
@@ -331,6 +346,7 @@
                 paper: "bsom162-question-paper.pdf"
             },
 
+
             "BSSS-183": {
                 title: "जीवन कौशल जानकारियाँ",
                 english: "Life Skills",
@@ -341,11 +357,13 @@
                 paper: "bsss183-question-paper.pdf"
             },
 
+
             "BHDAE-182": {
-                title: "BHDAE-182",
-                english: "BHDAE-182",
-                session: "2025–26",
-                programme: "IGNOU",
+                title: "हिंदी भाषा और संप्रेषण",
+                english: "Hindi Bhasha aur Sampreshan",
+                session: "January 2026",
+                programme: "B.Sc (Applied Sciences – Energy)",
+                semester: "First Semester",
                 assignment: "Solved Assignment",
                 language: "Hindi",
                 paper: "bhdae182-question-paper.pdf"
@@ -353,6 +371,10 @@
 
         };
 
+
+        /* =====================================
+           GET COURSE FROM URL
+        ===================================== */
 
         const params =
             new URLSearchParams(window.location.search);
@@ -374,6 +396,10 @@
         const container =
             document.getElementById("courseContainer");
 
+
+        /* =====================================
+           COURSE NOT FOUND
+        ===================================== */
 
         if (!course) {
 
@@ -400,51 +426,165 @@
 
             `;
 
-        } else {
+        }
+
+        /* =====================================
+           SHOW COURSE
+        ===================================== */
+
+        else {
 
             document.title =
                 `${courseCode} | StudyMint`;
+
+
+            let infoBoxes = `
+
+                <div class="info-box">
+
+                    <strong>
+                        Course Code
+                    </strong>
+
+                    <span>
+                        ${courseCode}
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Programme
+                    </strong>
+
+                    <span>
+                        ${course.programme}
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Session
+                    </strong>
+
+                    <span>
+                        ${course.session}
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Language
+                    </strong>
+
+                    <span>
+                        ${course.language}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            /* BHDAE-182 में Semester भी दिखाएँ */
+
+            if (course.semester) {
+
+                infoBoxes = `
+
+                    <div class="info-box">
+
+                        <strong>
+                            Course Code
+                        </strong>
+
+                        <span>
+                            ${courseCode}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Programme
+                        </strong>
+
+                        <span>
+                            ${course.programme}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Semester
+                        </strong>
+
+                        <span>
+                            ${course.semester}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Session
+                        </strong>
+
+                        <span>
+                            ${course.session}
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
 
 
             container.innerHTML = `
 
                 <div class="course-card">
 
+
                     <span class="tag">
                         SOLVED ASSIGNMENT
                     </span>
+
 
                     <h1>
                         ${courseCode}
                     </h1>
 
+
                     <p class="subtitle">
-                        ${course.title}<br>
+
+                        ${course.title}
+
+                        <br>
+
                         ${course.english}
+
                     </p>
 
 
                     <div class="info-grid">
 
-                        <div class="info-box">
-                            <strong>Course Code</strong>
-                            <span>${courseCode}</span>
-                        </div>
-
-                        <div class="info-box">
-                            <strong>Programme</strong>
-                            <span>${course.programme}</span>
-                        </div>
-
-                        <div class="info-box">
-                            <strong>Session</strong>
-                            <span>${course.session}</span>
-                        </div>
-
-                        <div class="info-box">
-                            <strong>Language</strong>
-                            <span>${course.language}</span>
-                        </div>
+                        ${infoBoxes}
 
                     </div>
 
@@ -464,23 +604,29 @@
                             What's Included?
                         </h2>
 
+
                         <div class="features">
+
 
                             <div class="feature">
                                 ✓ Complete solved assignment
                             </div>
 
+
                             <div class="feature">
                                 ✓ All important questions covered
                             </div>
+
 
                             <div class="feature">
                                 ✓ Easy-to-understand answers
                             </div>
 
+
                             <div class="feature">
                                 ✓ Ready for study and reference
                             </div>
+
 
                         </div>
 
@@ -492,6 +638,7 @@
                         <div class="price">
                             ₹29
                         </div>
+
 
                         <a
                             href="payment.html?course=${encodeURIComponent(courseCode)}"
@@ -505,13 +652,17 @@
 
                     <div class="notice">
 
-                        <strong>Notice:</strong>
+                        <strong>
+                            Notice:
+                        </strong>
+
                         StudyMint is an independent educational
                         platform. The materials provided are
                         prepared for educational and reference
                         purposes.
 
                     </div>
+
 
                 </div>
 
