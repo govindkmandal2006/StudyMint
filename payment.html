@@ -1,462 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Payment | StudyMint</title>
+  <title>Payment | StudyMint</title>
 
-    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f7fb;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+    body {
+      background: #f5f7fb;
+      color: #1f2937;
+    }
 
-        .payment-card {
-            width: 100%;
-            max-width: 500px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        }
+    header {
+      background: #ffffff;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
 
-        .logo {
-            text-align: center;
-            color: #2563eb;
-            font-size: 25px;
-            font-weight: 800;
-            margin-bottom: 25px;
-        }
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #2563eb;
+    }
 
-        .course-box {
-            background: #eff6ff;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
+    .back {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: 600;
+    }
 
-        .course-code {
-            font-size: 22px;
-            font-weight: 800;
-            color: #111827;
-            margin-bottom: 8px;
-        }
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 20px;
+    }
 
-        .course-name {
-            color: #64748b;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
 
-        .price {
-            margin-top: 12px;
-            color: #2563eb;
-            font-size: 25px;
-            font-weight: 800;
-        }
+    .tag {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #2563eb;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
 
-        label {
-            display: block;
-            color: #374151;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
 
-        input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-            margin-bottom: 18px;
-        }
+    .course {
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
 
-        input:focus {
-            border-color: #2563eb;
-        }
+    .price-box {
+      background: #f8fafc;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
 
-        .pay-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+    .price-label {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
 
-        .pay-btn:hover {
-            background: #1d4ed8;
-        }
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      color: #111827;
+    }
 
-        .pay-btn:disabled {
-            background: #93c5fd;
-            cursor: not-allowed;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin-top: 18px;
-            text-decoration: none;
-            color: #2563eb;
-            font-size: 14px;
-            font-weight: 600;
-        }
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 18px;
+    }
 
-        .message {
-            text-align: center;
-            margin-top: 18px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+    input:focus {
+      border-color: #2563eb;
+    }
 
-        .error {
-            color: #dc2626;
-        }
+    button {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        .loading {
-            color: #64748b;
-        }
+    button:hover {
+      background: #1d4ed8;
+    }
 
-        @media (max-width: 500px) {
-            .payment-card {
-                padding: 25px 20px;
-            }
-        }
-    </style>
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      color: #dc2626;
+      font-size: 14px;
+    }
+
+    .legal {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .legal a {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 0 5px;
+    }
+
+    .legal a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      margin-top: 12px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 30px auto;
+      }
+
+      .card {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="payment-card">
+  <header>
+    <div class="logo">StudyMint</div>
+    <a href="index.html" class="back">← Back to Home</a>
+  </header>
 
-        <div class="logo">
-            StudyMint
+
+  <main class="container">
+
+    <div class="card">
+
+      <div class="tag">SECURE CHECKOUT</div>
+
+      <h1>Complete Your Purchase</h1>
+
+      <p class="course" id="courseName">
+        Loading course...
+      </p>
+
+
+      <div class="price-box">
+
+        <div class="price-label">
+          Total Amount
         </div>
 
-
-        <div class="course-box">
-
-            <div
-                class="course-code"
-                id="courseCode"
-            >
-                Loading...
-            </div>
-
-            <div
-                class="course-name"
-                id="courseName"
-            >
-                Please wait...
-            </div>
-
-            <div class="price">
-                ₹29
-            </div>
-
+        <div class="price">
+          ₹29
         </div>
 
-
-        <form id="paymentForm">
-
-            <label for="email">
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
+      </div>
 
 
-            <button
-                type="submit"
-                class="pay-btn"
-                id="payBtn"
-            >
-                Pay ₹29
-            </button>
+      <label for="email">
+        Email Address
+      </label>
 
-        </form>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email address"
+        required
+      >
 
 
-        <a
-            href="index.html"
-            class="back-btn"
-        >
-            ← Back to Home
+      <button
+        id="payButton"
+        onclick="startPayment()"
+      >
+        Pay ₹29
+      </button>
+
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+
+      <div class="legal">
+
+        <a href="contact.html">
+          Contact Us
         </a>
 
+        <span>•</span>
 
-        <div
-            id="message"
-            class="message"
-        ></div>
+        <a href="terms.html">
+          Terms & Conditions
+        </a>
+
+        <span>•</span>
+
+        <a href="refunds.html">
+          Refund & Cancellation
+        </a>
+
+        <span>•</span>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+      </div>
+
+
+      <p class="note">
+        By continuing with the payment, you agree to our
+        Terms & Conditions and Refund & Cancellation Policy.
+      </p>
 
     </div>
 
+  </main>
 
-    <script>
 
-        /* =====================================
-           COURSE INFORMATION
-        ===================================== */
+  <script>
 
-        const courses = {
+    const params = new URLSearchParams(
+      window.location.search
+    );
 
-            "BPSC-104": {
-                name: "भारतीय राजनीतिक प्रक्रिया"
+    const course = params.get("course");
+
+    const validCourses = [
+      "BPSC-104",
+      "BPSC-105",
+      "BSOM-162",
+      "BSSS-183",
+      "BHDAE-182"
+    ];
+
+
+    const courseNames = {
+      "BPSC-104": "भारतीय राजनीतिक प्रक्रिया",
+      "BPSC-105": "तुलनात्मक सरकार और राजनीति का परिचय",
+      "BSOM-162": "भारतीय समाज समझ",
+      "BSSS-183": "जीवन कौशल जानकारियाँ",
+      "BHDAE-182": "हिंदी भाषा और संप्रेषण"
+    };
+
+
+    const courseName =
+      document.getElementById("courseName");
+
+    const payButton =
+      document.getElementById("payButton");
+
+    const message =
+      document.getElementById("message");
+
+
+    if (
+      !course ||
+      !validCourses.includes(course)
+    ) {
+
+      courseName.textContent =
+        "Invalid course";
+
+      payButton.disabled = true;
+
+      message.textContent =
+        "Please go back and select a valid course.";
+
+    } else {
+
+      courseName.textContent =
+        course + " — " + courseNames[course];
+
+    }
+
+
+    async function startPayment() {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+
+      if (!email) {
+
+        message.textContent =
+          "Please enter your email address.";
+
+        return;
+      }
+
+
+      if (!email.includes("@")) {
+
+        message.textContent =
+          "Please enter a valid email address.";
+
+        return;
+      }
+
+
+      payButton.disabled = true;
+
+      payButton.textContent =
+        "Processing...";
+
+      message.textContent = "";
+
+
+      try {
+
+        const response =
+          await fetch("/create-order", {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
             },
 
-            "BPSC-105": {
-                name: "तुलनात्मक सरकार और राजनीति का परिचय"
-            },
+            body: JSON.stringify({
+              email: email,
+              course: course
+            })
 
-            "BSOM-162": {
-                name: "भारतीय समाज समझ"
-            },
-
-            "BSSS-183": {
-                name: "जीवन कौशल जानकारियाँ"
-            },
-
-            "BHDAE-182": {
-                name: "BHDAE-182"
-            }
-
-        };
+          });
 
 
-        /* =====================================
-           GET COURSE FROM URL
-        ===================================== */
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-        const requestedCourse =
-            params.get("course");
+        const data =
+          await response.json();
 
 
-        const courseCode =
-            requestedCourse
-                ? requestedCourse.toUpperCase()
-                : "";
+        if (!response.ok || !data.payment_session_id) {
 
-
-        const course =
-            courses[courseCode];
-
-
-        const courseCodeElement =
-            document.getElementById(
-                "courseCode"
-            );
-
-        const courseNameElement =
-            document.getElementById(
-                "courseName"
-            );
-
-        const paymentForm =
-            document.getElementById(
-                "paymentForm"
-            );
-
-        const payBtn =
-            document.getElementById(
-                "payBtn"
-            );
-
-        const message =
-            document.getElementById(
-                "message"
-            );
-
-
-        /* =====================================
-           INVALID COURSE
-        ===================================== */
-
-        if (!course) {
-
-            courseCodeElement.innerText =
-                "Course Not Found";
-
-            courseNameElement.innerText =
-                "Please select a valid course.";
-
-            paymentForm.style.display =
-                "none";
-
-        } else {
-
-            courseCodeElement.innerText =
-                courseCode;
-
-            courseNameElement.innerText =
-                course.name;
-
-            document.title =
-                `${courseCode} Payment | StudyMint`;
+          throw new Error(
+            data.message || "Unable to create payment."
+          );
 
         }
 
 
-        /* =====================================
-           PAYMENT
-        ===================================== */
-
-        paymentForm.addEventListener(
-            "submit",
-            async function(event) {
-
-                event.preventDefault();
+        const cashfree =
+          Cashfree({
+            mode: "sandbox"
+          });
 
 
-                if (!course) {
-                    return;
-                }
+        cashfree.checkout({
+
+          paymentSessionId:
+            data.payment_session_id,
+
+          redirectTarget: "_self"
+
+        });
 
 
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
+      } catch (error) {
 
+        console.error(error);
 
-                if (!email) {
+        message.textContent =
+          error.message ||
+          "Something went wrong. Please try again.";
 
-                    message.innerText =
-                        "Please enter your email.";
+        payButton.disabled = false;
 
-                    message.className =
-                        "message error";
+        payButton.textContent =
+          "Pay ₹29";
 
-                    return;
-                }
+      }
 
+    }
 
-                payBtn.disabled = true;
-
-                payBtn.innerText =
-                    "Creating Payment...";
-
-
-                message.innerText =
-                    "Please wait...";
-
-                message.className =
-                    "message loading";
-
-
-                try {
-
-                    /* CREATE ORDER */
-
-                    const response =
-                        await fetch(
-                            "/create-order",
-                            {
-                                method: "POST",
-
-                                headers: {
-                                    "Content-Type":
-                                        "application/json"
-                                },
-
-                                body:
-                                    JSON.stringify({
-                                        email: email,
-                                        course: courseCode
-                                    })
-                            }
-                        );
-
-
-                    const data =
-                        await response.json();
-
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            data.error ||
-                            "Unable to create order."
-                        );
-
-                    }
-
-
-                    /* CASHFREE */
-
-                    const cashfree =
-                        Cashfree({
-                            mode: "sandbox"
-                        });
-
-
-                    await cashfree.checkout({
-
-                        paymentSessionId:
-                            data.payment_session_id,
-
-                        redirectTarget:
-                            "_self"
-
-                    });
-
-
-                } catch (error) {
-
-                    console.error(error);
-
-
-                    message.innerText =
-                        error.message ||
-                        "Something went wrong.";
-
-                    message.className =
-                        "message error";
-
-
-                    payBtn.disabled = false;
-
-                    payBtn.innerText =
-                        "Pay ₹29";
-
-                }
-
-            }
-        );
-
-    </script>
+  </script>
 
 </body>
 </html>
