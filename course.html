@@ -115,12 +115,70 @@
             font-weight: 700;
         }
 
-        .paper-link {
+        /* QUESTION PAPER */
+
+        .question-paper-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 15px;
+            padding: 22px;
+            margin-top: 5px;
+            margin-bottom: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .question-paper-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .question-paper-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.08);
+        }
+
+        .question-paper-info h3 {
+            color: #111827;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .question-paper-info p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .paper-btn {
             display: inline-block;
             text-decoration: none;
+            background: #ffffff;
             color: #2563eb;
+            border: 1px solid #2563eb;
+            padding: 12px 20px;
+            border-radius: 9px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 30px;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .paper-btn:hover {
+            background: #2563eb;
+            color: #ffffff;
         }
 
         .section {
@@ -146,11 +204,14 @@
             color: #4b5563;
         }
 
+        /* BUY SECTION */
+
         .buy-section {
             margin-top: 35px;
-            padding: 28px;
+            padding: 30px;
             border-radius: 15px;
             background: #eff6ff;
+            border: 1px solid #dbeafe;
             text-align: center;
         }
 
@@ -166,7 +227,7 @@
             text-decoration: none;
             background: #2563eb;
             color: #ffffff;
-            padding: 14px 30px;
+            padding: 15px 32px;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 700;
@@ -236,6 +297,15 @@
             .course-card {
                 padding: 28px 20px;
             }
+
+            .question-paper-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .paper-btn {
+                text-align: center;
+            }
         }
 
         @media (max-width: 500px) {
@@ -258,6 +328,10 @@
 
             .home-link {
                 font-size: 14px;
+            }
+
+            .question-paper-info {
+                align-items: flex-start;
             }
         }
     </style>
@@ -382,16 +456,13 @@
         const requestedCourse =
             params.get("course");
 
-
         const courseCode =
             requestedCourse
                 ? requestedCourse.toUpperCase()
                 : "";
 
-
         const course =
             courses[courseCode];
-
 
         const container =
             document.getElementById("courseContainer");
@@ -427,6 +498,7 @@
             `;
 
         }
+
 
         /* =====================================
            SHOW COURSE
@@ -494,7 +566,7 @@
             `;
 
 
-            /* BHDAE-182 में Semester भी दिखाएँ */
+            /* BHDAE-182 */
 
             if (course.semester) {
 
@@ -589,14 +661,43 @@
                     </div>
 
 
-                    <a
-                        href="${course.paper}"
-                        target="_blank"
-                        class="paper-link"
-                    >
-                        📄 View Question Paper
-                    </a>
+                    <!-- QUESTION PAPER -->
 
+                    <div class="question-paper-box">
+
+                        <div class="question-paper-info">
+
+                            <div class="question-paper-icon">
+                                📄
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Question Paper
+                                </h3>
+
+                                <p>
+                                    View the original question paper before purchasing.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="${course.paper}"
+                            target="_blank"
+                            class="paper-btn"
+                        >
+                            View Question Paper →
+                        </a>
+
+                    </div>
+
+
+                    <!-- FEATURES -->
 
                     <div class="section">
 
@@ -633,6 +734,8 @@
                     </div>
 
 
+                    <!-- BUY -->
+
                     <div class="buy-section">
 
                         <div class="price">
@@ -649,6 +752,8 @@
 
                     </div>
 
+
+                    <!-- NOTICE -->
 
                     <div class="notice">
 
