@@ -95,27 +95,65 @@
       cursor: pointer;
     }
 
+    /* SEARCH RESULT */
+
     .result {
       display: none;
       max-width: 650px;
-      margin: 20px auto 0;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
+      margin: 22px auto 0;
+      background: linear-gradient(135deg, #ffffff, #f8fbff);
+      padding: 24px;
+      border-radius: 16px;
       text-align: left;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.12);
+    }
+
+    .result-label {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #2563eb;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .result h3 {
+      font-size: 21px;
+      margin-bottom: 7px;
+      color: #111827;
     }
 
     .result p {
-      margin-bottom: 12px;
-      color: #374151;
+      margin-bottom: 17px;
+      color: #6b7280;
+      font-size: 15px;
     }
 
-    .result a {
+    .course-btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white !important;
       text-decoration: none;
-      color: #2563eb;
+      padding: 11px 18px;
+      border-radius: 9px;
       font-weight: bold;
+      transition: 0.2s;
     }
+
+    .course-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .not-found {
+      color: #dc2626 !important;
+      margin: 0 !important;
+      font-weight: 600;
+    }
+
+    /* FEATURES */
 
     .features {
       max-width: 1000px;
@@ -143,6 +181,8 @@
       line-height: 1.6;
     }
 
+    /* ABOUT */
+
     .about {
       background: white;
       text-align: center;
@@ -159,6 +199,8 @@
       color: #6b7280;
       line-height: 1.7;
     }
+
+    /* FOOTER */
 
     footer {
       background: #111827;
@@ -182,7 +224,10 @@
       color: white;
     }
 
+    /* MOBILE */
+
     @media (max-width: 700px) {
+
       header {
         padding: 16px 5%;
       }
@@ -215,6 +260,11 @@
       .features {
         grid-template-columns: 1fr;
       }
+
+      .result {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
     }
   </style>
 </head>
@@ -222,6 +272,7 @@
 <body>
 
   <header>
+
     <div class="logo">StudyMint</div>
 
     <nav>
@@ -229,6 +280,7 @@
       <a href="#search">Search</a>
       <a href="#about">About</a>
     </nav>
+
   </header>
 
 
@@ -240,19 +292,40 @@
       Find your course and get quality solved assignments easily.
     </p>
 
+
     <div class="search-box">
+
       <input
         type="text"
         id="courseInput"
         placeholder="Search course code or subject..."
       >
 
-      <button onclick="searchCourse()">Search</button>
+      <button onclick="searchCourse()">
+        Search
+      </button>
+
     </div>
 
+
     <div class="result" id="result">
+
+      <div class="result-label">
+        COURSE FOUND
+      </div>
+
+      <h3 id="resultTitle"></h3>
+
       <p id="resultText"></p>
-      <a id="courseLink" href="#">Open Course →</a>
+
+      <a
+        id="courseLink"
+        class="course-btn"
+        href="#"
+      >
+        Open Course →
+      </a>
+
     </div>
 
   </section>
@@ -261,24 +334,35 @@
   <section class="features">
 
     <div class="feature">
+
       <h3>📚 Quality Material</h3>
+
       <p>
         Helpful solved assignments prepared for students.
       </p>
+
     </div>
 
+
     <div class="feature">
+
       <h3>⚡ Easy Access</h3>
+
       <p>
         Search your course and access your study material quickly.
       </p>
+
     </div>
 
+
     <div class="feature">
+
       <h3>💳 Simple Payment</h3>
+
       <p>
         Secure and simple online payment experience.
       </p>
+
     </div>
 
   </section>
@@ -299,13 +383,28 @@
   <footer>
 
     <div class="footer-links">
-      <a href="contact.html">Contact Us</a>
-      <a href="terms.html">Terms & Conditions</a>
-      <a href="refunds.html">Refund & Cancellation</a>
-      <a href="privacy.html">Privacy Policy</a>
+
+      <a href="contact.html">
+        Contact Us
+      </a>
+
+      <a href="terms.html">
+        Terms & Conditions
+      </a>
+
+      <a href="refunds.html">
+        Refund & Cancellation
+      </a>
+
+      <a href="privacy.html">
+        Privacy Policy
+      </a>
+
     </div>
 
-    <p>© 2026 StudyMint. All rights reserved.</p>
+    <p>
+      © 2026 StudyMint. All rights reserved.
+    </p>
 
   </footer>
 
@@ -313,6 +412,7 @@
   <script>
 
     const courses = {
+
       "BPSC-104": "BPSC-104",
       "BPSC-105": "BPSC-105",
       "BSOM-162": "BSOM-162",
@@ -324,6 +424,27 @@
       "भारतीय समाज समझ": "BSOM-162",
       "जीवन कौशल जानकारियाँ": "BSSS-183",
       "हिंदी भाषा और संप्रेषण": "BHDAE-182"
+
+    };
+
+
+    const courseNames = {
+
+      "BPSC-104":
+        "भारतीय राजनीतिक प्रक्रिया",
+
+      "BPSC-105":
+        "तुलनात्मक सरकार और राजनीति का परिचय",
+
+      "BSOM-162":
+        "भारतीय समाज समझ",
+
+      "BSSS-183":
+        "जीवन कौशल जानकारियाँ",
+
+      "BHDAE-182":
+        "हिंदी भाषा और संप्रेषण"
+
     };
 
 
@@ -334,31 +455,82 @@
         .value
         .trim();
 
-      const result = document.getElementById("result");
-      const resultText = document.getElementById("resultText");
-      const courseLink = document.getElementById("courseLink");
+      const result =
+        document.getElementById("result");
 
-      const key = input.toUpperCase();
+      const resultTitle =
+        document.getElementById("resultTitle");
 
-      let course = courses[key];
+      const resultText =
+        document.getElementById("resultText");
 
-      if (!course) {
+      const courseLink =
+        document.getElementById("courseLink");
 
-        const found = Object.keys(courses).find(
-          item => item.toLowerCase() === input.toLowerCase()
-        );
 
-        if (found) {
-          course = courses[found];
-        }
-      }
-
-      if (course) {
+      if (!input) {
 
         result.style.display = "block";
 
+        result.querySelector(".result-label").style.display = "none";
+
+        resultTitle.textContent =
+          "Please enter a course code.";
+
+        resultText.textContent = "";
+
+        resultText.className = "not-found";
+
+        courseLink.style.display = "none";
+
+        return;
+      }
+
+
+      const found = Object.keys(courses).find(
+        item =>
+          item.toLowerCase() === input.toLowerCase()
+      );
+
+
+      let course = found
+        ? courses[found]
+        : null;
+
+
+      if (!course) {
+
+        const hindiFound =
+          Object.keys(courses).find(
+            item =>
+              item.toLowerCase() === input.toLowerCase()
+          );
+
+        if (hindiFound) {
+          course = courses[hindiFound];
+        }
+
+      }
+
+
+      result.style.display = "block";
+
+
+      if (course) {
+
+        result.querySelector(".result-label").style.display =
+          "inline-block";
+
+        resultTitle.textContent =
+          course;
+
         resultText.textContent =
-          "Course found: " + course;
+          courseNames[course];
+
+        resultText.className = "";
+
+        courseLink.style.display =
+          "inline-block";
 
         courseLink.href =
           "course.html?course=" +
@@ -366,25 +538,38 @@
 
       } else {
 
-        result.style.display = "block";
+        result.querySelector(".result-label").style.display =
+          "none";
+
+        resultTitle.textContent =
+          "Course not found";
 
         resultText.textContent =
-          "Course not found. Please check the course code.";
+          "Please check the course code or subject name.";
 
-        courseLink.href = "#";
+        resultText.className =
+          "not-found";
+
+        courseLink.style.display =
+          "none";
+
       }
+
     }
 
 
     document
       .getElementById("courseInput")
-      .addEventListener("keypress", function(event) {
+      .addEventListener(
+        "keypress",
+        function(event) {
 
-        if (event.key === "Enter") {
-          searchCourse();
+          if (event.key === "Enter") {
+            searchCourse();
+          }
+
         }
-
-      });
+      );
 
   </script>
 
