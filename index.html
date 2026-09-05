@@ -172,21 +172,66 @@
       line-height: 1.6;
     }
 
+    /* ABOUT SECTION */
+
     .about {
       background: white;
+      padding: 70px 20px;
       text-align: center;
-      padding: 60px 20px;
+    }
+
+    .about-container {
+      max-width: 850px;
+      margin: auto;
     }
 
     .about h2 {
-      margin-bottom: 15px;
+      font-size: 32px;
+      margin-bottom: 18px;
+      color: #111827;
     }
 
-    .about p {
-      max-width: 700px;
-      margin: auto;
+    .about-intro {
+      font-size: 17px;
       color: #6b7280;
       line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .about-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .about-point {
+      background: #f8fafc;
+      padding: 25px 18px;
+      border-radius: 14px;
+    }
+
+    .about-point .icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .about-point h3 {
+      font-size: 18px;
+      margin-bottom: 9px;
+      color: #111827;
+    }
+
+    .about-point p {
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .about-note {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
     }
 
     footer {
@@ -212,6 +257,7 @@
     }
 
     @media (max-width: 700px) {
+
       header {
         padding: 16px 5%;
       }
@@ -241,7 +287,8 @@
         padding: 14px;
       }
 
-      .features {
+      .features,
+      .about-points {
         grid-template-columns: 1fr;
       }
 
@@ -256,6 +303,7 @@
 <body>
 
   <header>
+
     <div class="logo">StudyMint</div>
 
     <nav>
@@ -263,6 +311,7 @@
       <a href="#search">Search</a>
       <a href="#about">About</a>
     </nav>
+
   </header>
 
 
@@ -340,12 +389,69 @@
 
   <section class="about" id="about">
 
-    <h2>About StudyMint</h2>
+    <div class="about-container">
 
-    <p>
-      StudyMint is an educational platform created to make study
-      materials and solved assignments easier to find and access.
-    </p>
+      <h2>About StudyMint</h2>
+
+      <p class="about-intro">
+        StudyMint is an educational platform designed to make
+        study materials and solved assignments easier to find,
+        purchase, and access.
+      </p>
+
+
+      <div class="about-points">
+
+        <div class="about-point">
+
+          <div class="icon">🎓</div>
+
+          <h3>For Students</h3>
+
+          <p>
+            Find useful course materials and solved assignments
+            in one simple place.
+          </p>
+
+        </div>
+
+
+        <div class="about-point">
+
+          <div class="icon">📖</div>
+
+          <h3>Easy Learning</h3>
+
+          <p>
+            Our goal is to make study resources simple,
+            accessible, and easy to use.
+          </p>
+
+        </div>
+
+
+        <div class="about-point">
+
+          <div class="icon">🔒</div>
+
+          <h3>Simple & Secure</h3>
+
+          <p>
+            Easy access and secure online payment for
+            purchased educational materials.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="about-note">
+        StudyMint is an independent educational platform and
+        is not affiliated with any university or institution.
+      </p>
+
+    </div>
 
   </section>
 
@@ -353,13 +459,28 @@
   <footer>
 
     <div class="footer-links">
-      <a href="contact.html">Contact Us</a>
-      <a href="terms.html">Terms & Conditions</a>
-      <a href="refunds.html">Refund & Cancellation</a>
-      <a href="privacy.html">Privacy Policy</a>
+
+      <a href="contact.html">
+        Contact Us
+      </a>
+
+      <a href="terms.html">
+        Terms & Conditions
+      </a>
+
+      <a href="refunds.html">
+        Refund & Cancellation
+      </a>
+
+      <a href="privacy.html">
+        Privacy Policy
+      </a>
+
     </div>
 
-    <p>© 2026 StudyMint. All rights reserved.</p>
+    <p>
+      © 2026 StudyMint. All rights reserved.
+    </p>
 
   </footer>
 
@@ -367,6 +488,7 @@
   <script>
 
     const courses = {
+
       "BPSC-104": "BPSC-104",
       "BPSC-105": "BPSC-105",
       "BSOM-162": "BSOM-162",
@@ -378,32 +500,44 @@
       "भारतीय समाज समझ": "BSOM-162",
       "जीवन कौशल जानकारियाँ": "BSSS-183",
       "हिंदी भाषा और संप्रेषण": "BHDAE-182"
+
     };
 
 
     const courseNames = {
-      "BPSC-104": "भारतीय राजनीतिक प्रक्रिया",
-      "BPSC-105": "तुलनात्मक सरकार और राजनीति का परिचय",
-      "BSOM-162": "भारतीय समाज समझ",
-      "BSSS-183": "जीवन कौशल जानकारियाँ",
-      "BHDAE-182": "हिंदी भाषा और संप्रेषण"
+
+      "BPSC-104":
+        "भारतीय राजनीतिक प्रक्रिया",
+
+      "BPSC-105":
+        "तुलनात्मक सरकार और राजनीति का परिचय",
+
+      "BSOM-162":
+        "भारतीय समाज समझ",
+
+      "BSSS-183":
+        "जीवन कौशल जानकारियाँ",
+
+      "BHDAE-182":
+        "हिंदी भाषा और संप्रेषण"
+
     };
 
 
     function normalize(text) {
+
       return text
         .toLowerCase()
         .replace(/[\s-]/g, "")
         .trim();
+
     }
 
 
     function searchCourse() {
 
-      const input = document
-        .getElementById("courseInput")
-        .value
-        .trim();
+      const input =
+        document.getElementById("courseInput").value.trim();
 
       const result =
         document.getElementById("result");
@@ -424,12 +558,14 @@
       if (!input) {
 
         result.style.display = "block";
+
         resultLabel.style.display = "none";
 
         resultTitle.textContent =
           "Please enter a course code.";
 
         resultText.textContent = "";
+
         resultText.className = "not-found";
 
         courseLink.style.display = "none";
@@ -450,6 +586,7 @@
         if (normalize(key) === normalizedInput) {
 
           course = courses[key];
+
           break;
 
         }
@@ -461,7 +598,8 @@
 
         result.style.display = "block";
 
-        resultLabel.style.display = "inline-block";
+        resultLabel.style.display =
+          "inline-block";
 
         resultTitle.textContent =
           course;
@@ -508,7 +646,9 @@
         function(event) {
 
           if (event.key === "Enter") {
+
             searchCourse();
+
           }
 
         }
